@@ -1,6 +1,11 @@
 const express = require("express")
 const app = express()
 
+// parse application/x-www-form-encoded and application/json
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded())
+app.use(bodyParser.json())
+
 //models
 const User = require('./models/User')
 
