@@ -15,7 +15,7 @@ router.get("/register", (req, res) => {
 })
 
 router.post("/register", (req, res) => {
-    var { name, email, password, balance } = req.body
+    var { name, email, password, balance } = req.body.user
 
     //hash password
     bcrypt.hash(password, saltRounds, function (err, hash) {
@@ -32,18 +32,18 @@ router.post("/register", (req, res) => {
         User.find({ email: user.email }, (err, emails) => {
             //if user already exists in database    
             if (emails.length) {
-                console.log("Email already exists")
+                res.send("Email already exists")
             } 
-
             else {
                 //add the user to the db
                 user.save((err) => {
                     if (err) {
                         console.log(err)
                     } else {
-                        // console.log('user successfully added: ', user)
+                        console.log('user successfully added: ', user)
                     }
                 })
+                res.send("User successfully added")
             }
         })
     })
