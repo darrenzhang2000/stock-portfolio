@@ -12,6 +12,10 @@ const User = require('./models/User')
 //routes
 const users = require('./routes/users')
 
+//allow cors
+var cors = require('cors')
+app.use(cors())
+
 //connect to mongoose
 const mongoose = require("mongoose")
 mongoose.connect(
