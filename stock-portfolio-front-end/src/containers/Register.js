@@ -14,7 +14,7 @@ class RegisterContainer extends React.Component {
             name: "",
             email: "",
             password: "",
-            balance: "",
+            balance: 5000,
             errors: ""
         }
     }
@@ -42,7 +42,6 @@ class RegisterContainer extends React.Component {
 
     onSubmitHandler = (e) => {
         e.preventDefault()
-        console.log('submitted', this.state)
 
         //create user 
         let user = { ...this.state }
@@ -61,16 +60,12 @@ class RegisterContainer extends React.Component {
             errors.push({ msg: "Please enter valid email address"})
         }
 
-        //check if email already exists in db
-        
-        console.log("pre", errors)
         //if no errors, add user to db by making an axios call to backend server 
         if(!errors.length){
         axios.post('http://localhost:5000/users/register', {user})
             .then(res => {
-                console.log('res', res.data)
+                //check if email already exists in db
                 if(res.data =="Email already exists"){
-                    console.log("Email already exists")
                     errors.push({msg: "Email already exists"})
                     //re-direct to same page with error and original data 
                     this.setState({ errors: errors })
