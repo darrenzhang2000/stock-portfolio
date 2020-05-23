@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
 
   return (
@@ -58,7 +58,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={props.onSubmitHandler}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -69,6 +69,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={props.changeEmailHandler}
           />
           <TextField
             variant="outlined"
@@ -80,6 +81,7 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={props.changePasswordHandler}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
