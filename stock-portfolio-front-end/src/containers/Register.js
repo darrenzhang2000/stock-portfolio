@@ -1,5 +1,11 @@
 import React from "react"
 import Register from "../components/Register"
+import axios from 'axios'
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 
 class RegisterContainer extends React.Component {
     constructor() {
@@ -9,6 +15,7 @@ class RegisterContainer extends React.Component {
             email: "",
             password: "",
             balance: "",
+            errors: ""
         }
     }
 
@@ -36,6 +43,49 @@ class RegisterContainer extends React.Component {
     onSubmitHandler = (e) => {
         e.preventDefault()
         console.log('submitted', this.state)
+
+        //create user 
+        let user = { ...this.state }
+
+        //form validation 
+        this.setState({errors: []}) //clears existing errors if any
+        let errors = []
+        
+        //all fields non-empty
+        if(!this.state.name || !this.state.email || !this.state.password){
+            errors.push({ msg: 'Please fill in all fields' })
+        }
+
+        //check if valid email
+        if(!validateEmail(this.state.email)){
+            errors.push({ msg: "Please enter valid email address"})
+        }
+
+        //check if email already exists in db
+        
+        console.log("pre", errors)
+        //if no errors, add user to db by making an axios call to backend server 
+        if(!errors.length){
+        axios.post('http://localhost:5000/users/register', {user})
+            .then(res => {
+                console.log('res', res.data)
+                if(res.data =="Email already exists"){
+                    console.log("Email already exists")
+                    errors.push({msg: "Email already exists"})
+                    //re-direct to same page with error and original data 
+                    this.setState({ errors: errors })
+                }
+                else{
+                    //success
+                    alert('You have successfully registered')
+                    //redirect to home page
+                }
+            })
+        }
+        else{
+            //if there are errors, re-direct to the same page with errors and original data
+            this.setState({ errors: errors })
+        }
     }
 
     render() {
@@ -45,6 +95,7 @@ class RegisterContainer extends React.Component {
                 email={this.state.email}
                 password={this.state.password}
                 balance={this.state.balance}
+                errors={this.state.errors}
                 changeNameHandler={this.changeNameHandler}
                 changeEmailHandler={this.changeEmailHandler}
                 changePasswordHandler={this.changePasswordHandler}

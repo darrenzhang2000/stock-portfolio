@@ -47,9 +47,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp(props) {
   const classes = useStyles();
-
   return (
     <Container component="main" maxWidth="xs">
+      <ul>
+        {
+          props.errors ? props.errors.map((err, i) => <li key={i}>{err.msg}</li>) : null
+        }
+      </ul>
+      
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
