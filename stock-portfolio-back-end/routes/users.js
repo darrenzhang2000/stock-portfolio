@@ -29,12 +29,21 @@ router.post("/register", (req, res) => {
             balance: balance,
         })
 
-        //add the user to the db
-        user.save((err) => {
-            if (err) {
-                console.log(err)
-            } else {
-                // console.log('user successfully added: ', user)
+        User.find({ email: user.email }, (err, emails) => {
+            //if user already exists in database    
+            if (emails.length) {
+                console.log("Email already exists")
+            } 
+
+            else {
+                //add the user to the db
+                user.save((err) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        // console.log('user successfully added: ', user)
+                    }
+                })
             }
         })
     })
