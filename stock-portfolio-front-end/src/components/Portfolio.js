@@ -13,17 +13,33 @@ const Portfolio = (props) => {
         </ul>
       </div>
 
+      <ul>
+        {props.errors ? props.errors.map((err) => <li>{err.msg}</li>) : null}
+      </ul>
+
       <form name="purchase" onSubmit={props.onSubmitHandler}>
         <div>
           <label>
             Transfer
-            <input type="text" id="ticker" name="ticker" placeholder="Ticker" onChange={props.onTickerChange}/>
+            <input
+              type="text"
+              id="ticker"
+              name="ticker"
+              placeholder="Ticker"
+              onChange={props.onTickerChange}
+            />
           </label>
         </div>
         <div>
           <label>
             Qty
-            <input type="text" id="qty" name="qty" placeholder="Qty" onChange={props.onQtyChange}/>
+            <input
+              type="text"
+              id="qty"
+              name="qty"
+              placeholder="Qty"
+              onChange={props.onQtyChange}
+            />
           </label>
         </div>
         <input type="submit" />
