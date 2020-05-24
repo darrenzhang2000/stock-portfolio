@@ -4,11 +4,15 @@ import LoginContainer from './containers/Login'
 import RegisterContainer from './containers/Register'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import Portfolio from './components/Portfolio'
+import PortfolioContainer from './containers/Portfolio'
 
 function App() {
   return (
     <div className="App">
       <Router>  
+
+        <PortfolioContainer/>
 
         {/* containers all the links */}
         <Navbar/> 
