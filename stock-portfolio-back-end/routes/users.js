@@ -6,8 +6,34 @@ const User = require("../models/User")
 const bcrypt = require("bcrypt")
 const saltRounds = 10
 
-router.get("/login", (req, res) => {
-    res.send("login")
+async function passMatch(user, password){
+    //compares inputted password with hashed password in db
+    const match = await bcrypt.compare(password, user.password)
+    return match
+}
+
+router.get("/login/email/:email/password/:password", (req, res) => {
+    // console.log("email", req.params.email, req.params.password)
+
+    //find user with given email in the database
+    User.findOne({email: req.params.email}, async (err, user)=>{
+        //no user in database has specified email
+        if(!user){
+            res.send("User does not exist")
+        }
+        else{
+            //email exists but incorrect password
+            let match = await passMatch(user, req.params.password)
+            if(!match){
+                console.log("email exists but incorrect password")
+                res.send("email exists but incorrect password")
+            }
+            else{ //email and passwords match
+                console.log("Success: email and password match")
+                res.send("Success: email and password match")
+            }
+        }
+    })
 })
 
 router.get("/register", (req, res) => {
