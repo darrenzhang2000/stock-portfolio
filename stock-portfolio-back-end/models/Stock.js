@@ -1,9 +1,9 @@
 var mongoose = require("mongoose")
 
 const stockSchema = new mongoose.Schema({
-  name: String,
+  tickerSymb: String,
   qty: Number,
-  userID: Number,
+  email: String,
 })
 
-module.exports = mongoose.Model("Stock", stockSchema)
+module.exports = mongoose.model("Stock", stockSchema)

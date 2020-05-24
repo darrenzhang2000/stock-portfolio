@@ -11,6 +11,7 @@ const User = require('./models/User')
 
 //routes
 const users = require('./routes/users')
+const stocks = require('./routes/stocks')
 
 //allow cors
 var cors = require('cors')
@@ -29,24 +30,11 @@ db.once("open", () => {
     console.log("connected to db")
 })
 
-// const darren = new User({
-//     name: "Darren",
-//     email: "123@gmail.com",
-//     password: "test123",
-//     balance: 5000
-// })
-
-// darren.save((err) => {
-//     if(err){
-//         console.log(err)
-//     }
-// })
-
-
 app.get("/", (req, res) => {
     res.send("hello")
 })
 
 app.use('/users', users)
+app.use('/stocks', stocks)
 
 app.listen(5000, () => console.log("listening at port 5000"))
