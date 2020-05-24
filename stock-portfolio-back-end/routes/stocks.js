@@ -2,9 +2,20 @@ const express = require("express")
 const router = express.Router()
 const Stock = require("../models/Stock")
 
-router.post("/email/:email/stock/:tickerSymb/qty/:qty", async (req, res) => {
-  console.log(req.params.email, req.params.stock)
+//get the number of user's stocks
+router.get("/email/:email/stock/:tickerSymb", async (req, res) => {
+  var { email, tickerSymb, qty } = req.params
+  let doc = await Stock.findOne({ email: email, tickerSymb: tickerSymb }, (err, stock) => {
+    if(!stock){
+      res.send({ stockCount: 0 })
+    }
+  })
+  //need to handle if user does not have stock
+  res.send({ stockCount: doc.qty })
+})
 
+//update user's stock count
+router.post("/email/:email/stock/:tickerSymb/qty/:qty", async (req, res) => {
   var { email, tickerSymb, qty } = req.params
 
   Stock.findOne(
@@ -16,6 +27,7 @@ router.post("/email/:email/stock/:tickerSymb/qty/:qty", async (req, res) => {
         console.log("s", doc.qty)
         doc.qty += parseInt(qty)
         await doc.save()
+        res.send("Successfully updated stock count")
       } else {
         //otherwise create stock and store stock into the db
         const stock = new Stock({
@@ -28,6 +40,7 @@ router.post("/email/:email/stock/:tickerSymb/qty/:qty", async (req, res) => {
             console.log(err)
           } else {
             console.log("Stock added to db")
+            res.send("Added stock to db")
           }
         })
       }
