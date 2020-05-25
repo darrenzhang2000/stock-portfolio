@@ -7,7 +7,7 @@ class PurchaseContainer extends React.Component {
     super()
     this.state = {
       ticker: "",
-      qty: "",
+      qty: 0,
     }
   }
   onTickerChange = (e) => {
@@ -16,7 +16,7 @@ class PurchaseContainer extends React.Component {
   }
 
   onQtyChange = (e) => {
-    this.setState({ qty: e.target.value })
+    this.setState({ qty: parseInt(e.target.value) })
     console.log(this.state.qty)
   }
 
