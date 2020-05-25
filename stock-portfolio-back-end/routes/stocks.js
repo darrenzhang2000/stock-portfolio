@@ -4,7 +4,7 @@ const Stock = require("../models/Stock")
 
 //get the number of user's stocks
 router.get("/email/:email/stock/:tickerSymb", async (req, res) => {
-  var { email, tickerSymb, qty } = req.params
+  var { email, tickerSymb} = req.params
   let doc = await Stock.findOne({ email: email, tickerSymb: tickerSymb }, (err, stock) => {
     if(!stock){
       res.send({ stockCount: 0 })
