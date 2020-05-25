@@ -7,9 +7,7 @@ const Portfolio = (props) => {
       <div name="stocklist">
         <h1>Portfolio</h1>
         <ul>
-          <li>AAPL - 6 Shares $2048</li>
-          <li>STWO - 6 Shares $2048</li>
-          <li>NFLX - 6 Shares $2048</li>
+          {props.stocks ? props.stocks.map((stock, index) => <li key={index}>{stock.tickerSymb} : {stock.qty}</li>): null}
         </ul>
       </div>
 

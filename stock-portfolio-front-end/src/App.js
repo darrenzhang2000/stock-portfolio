@@ -23,10 +23,11 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('app user state', this.state.user)
     return (
       <div className="App">
         <Router>
-          <PortfolioContainer />
+          <PortfolioContainer user={this.state.user}/>
           <PurchaseContainer getUser={this.getUser}/>
 
           {/* containers all the links */}

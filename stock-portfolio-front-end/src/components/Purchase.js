@@ -3,7 +3,7 @@ import React from "react"
 const Purchase = (props) => {
   return (
     <form name="purchase" onSubmit={props.onSubmitHandler}>
-      <ul>{props.errors ? props.errors.map((err) => <li>{err.msg}</li>) : null}</ul>
+      <ul>{props.errors ? props.errors.map((err, index) => <li key={index}>{err.msg}</li>) : null}</ul>
       <div>
         <label>
           Transfer
