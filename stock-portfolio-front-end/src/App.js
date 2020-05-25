@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import Navbar from "./components/Navbar"
 import PortfolioContainer from "./containers/Portfolio"
 import PurchaseContainer from "./containers/Purchase"
+import TransactionsContainer from "./containers/Transactions"
 
 class App extends React.Component {
   constructor(){
@@ -27,6 +28,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
+          <TransactionsContainer />
+
           <PortfolioContainer user={this.state.user}/>
           <PurchaseContainer getUser={this.getUser}/>
 
