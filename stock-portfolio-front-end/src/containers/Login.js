@@ -49,7 +49,6 @@ class LoginContainer extends React.Component {
             console.log('url', url)
             axios.get(url)
                 .then(res => {
-                    console.log('here is the response data: ', res)
                     //email not in db
                     if(res.data == "User does not exist"){
                         errors.push({msg: "Email does not exist"})
@@ -63,6 +62,8 @@ class LoginContainer extends React.Component {
                     //successful login: email and password match
                     else if(res.data == "Success: email and password match"){
                         alert("Login Successful!")
+                        //pass user to login
+                        this.props.setUser(this.state.email)
                         //redirect to home page
                     }
                 })
