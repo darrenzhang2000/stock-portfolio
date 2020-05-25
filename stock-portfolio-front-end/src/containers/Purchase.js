@@ -29,8 +29,8 @@ class PurchaseContainer extends React.Component {
       errors.push({ msg: "Please fill in all fields" })
     }
 
-    if (!Number.isInteger(this.state.qty)){
-        errors.push({ msg: "Quantity has to be an integer"})
+    if (!Number.isInteger(this.state.qty)) {
+      errors.push({ msg: "Quantity has to be an integer" })
     }
 
     //if there are errors, rerender form with flash message containing error
@@ -72,7 +72,9 @@ class PurchaseContainer extends React.Component {
           //round cost to 2 decimal places
           cost = cost.toFixed(2)
           cost = parseFloat(cost)
-          console.log(`Cost of ${this.state.qty} share of ${this.state.ticker} is ${cost}`)
+          console.log(
+            `Cost of ${this.state.qty} share of ${this.state.ticker} is ${cost}`
+          )
 
           //retrieve user from App component
           const userEmail = this.props.getUser()
@@ -107,6 +109,16 @@ class PurchaseContainer extends React.Component {
             //add stock to user's account
             axios.post(
               `http://localhost:5000/stocks/email/${userEmail}/stock/${this.state.ticker}/qty/${this.state.qty}`,
+              (err) => {
+                if (err) {
+                  console.log(err)
+                }
+              }
+            )
+
+            //record transaction
+            axios.post(
+              `http://localhost:5000/transactions/email/${userEmail}/stock/${this.state.ticker}/qty/${this.state.qty}/cost/${cost}`,
               (err) => {
                 if (err) {
                   console.log(err)

@@ -15,6 +15,7 @@ router.get("/email/:email", (req, res) => {
   })
 })
 
+// http://localhost:5000/transactions/email/:email/stock/:tickerSymb/qty/:qty/cost/:cost
 //add a user's transaction into the db
 router.post(
   "/email/:email/stock/:tickerSymb/qty/:qty/cost/:cost",
