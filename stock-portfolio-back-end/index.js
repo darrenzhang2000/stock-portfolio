@@ -12,6 +12,7 @@ const User = require('./models/User')
 //routes
 const users = require('./routes/users')
 const stocks = require('./routes/stocks')
+const transactions = require('./routes/transactions')
 
 //allow cors
 var cors = require('cors')
@@ -36,5 +37,6 @@ app.get("/", (req, res) => {
 
 app.use('/users', users)
 app.use('/stocks', stocks)
+app.use('/transactions', transactions)
 
 app.listen(5000, () => console.log("listening at port 5000"))

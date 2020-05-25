@@ -13,8 +13,6 @@ async function passMatch(user, password) {
 }
 
 router.get("/login/email/:email/password/:password", (req, res) => {
-  // console.log("email", req.params.email, req.params.password)
-
   //find user with given email in the database
   User.findOne({ email: req.params.email }, async (err, user) => {
     //no user in database has specified email
@@ -65,9 +63,9 @@ router.post("/register", (req, res) => {
             console.log(err)
           } else {
             console.log("user successfully added: ", user)
+            res.send("User successfully added")
           }
         })
-        res.send("User successfully added")
       }
     })
   })
