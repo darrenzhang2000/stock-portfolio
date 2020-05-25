@@ -28,7 +28,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
-          <TransactionsContainer />
+          <TransactionsContainer email={this.state.user}/>
 
           <PortfolioContainer user={this.state.user}/>
           <PurchaseContainer getUser={this.getUser}/>

@@ -1,8 +1,6 @@
 import React from "react"
 
-//https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=1min&apikey=GYGD5L3VUM8VS4V9
 const Portfolio = (props) => {
-  // console.log('stocks', props.stocks.length > 0 ? props.stocks[0].tickerSymb : null)
   return (
     <div>
       <div name="stocklist">

@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const Transaction = require("../models/Transaction")
 
+// http://localhost:5000/transactions/email/:email
 //retrieve all of the user's transactions from the database
 router.get("/email/:email", (req, res) => {
   var { email } = req.params
