@@ -29,6 +29,10 @@ class PurchaseContainer extends React.Component {
       errors.push({ msg: "Please fill in all fields" })
     }
 
+    if (!Number.isInteger(this.state.qty)){
+        errors.push({ msg: "Quantity has to be an integer"})
+    }
+
     //if there are errors, rerender form with flash message containing error
     if (errors.length) {
       this.setState({ errors: errors })
@@ -87,7 +91,7 @@ class PurchaseContainer extends React.Component {
           //round newBalance to two decimal places
           newBalance = newBalance.toFixed(2)
           newBalance = parseFloat(newBalance)
-          
+
           //if user has enough money, purchase is valid.
           if (newBalance >= 0) {
             //deduct cost from balance in db

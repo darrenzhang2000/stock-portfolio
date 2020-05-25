@@ -3,6 +3,7 @@ import React from "react"
 const Purchase = (props) => {
   return (
     <form name="purchase" onSubmit={props.onSubmitHandler}>
+      <ul>{props.errors ? props.errors.map((err) => <li>{err.msg}</li>) : null}</ul>
       <div>
         <label>
           Transfer
@@ -17,7 +18,7 @@ const Purchase = (props) => {
       </div>
       <div>
         <label>
-          Qty
+          Quantity
           <input
             type="text"
             id="qty"
