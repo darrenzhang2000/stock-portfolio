@@ -73,6 +73,7 @@ router.post("/register", (req, res) => {
   })
 })
 
+//get user balance
 router.get("/email/:email/balance", async (req, res) => {
   var { email } = req.params
   let doc = await User.findOne({ email: email }, (err, user) => {
@@ -81,6 +82,20 @@ router.get("/email/:email/balance", async (req, res) => {
     }
   })
   res.send({ balance: doc.balance })
+})
+
+//update user balance
+router.post("/email/:email/balance/:balance", async (req, res) => {
+  var { email, balance } = req.params
+  let doc = await User.findOne({ email: email }, (err, user) => {
+    if (!user) {
+      res.send({ error: "Email does not exist" })
+    }
+  })
+  //set new balance
+  doc.balance = balance
+  doc.save()
+  res.send({ sucess: true, msg: `Your new balance is ${balance}` })
 })
 
 module.exports = router
