@@ -48,4 +48,17 @@ router.post("/email/:email/stock/:tickerSymb/qty/:qty", async (req, res) => {
   )
 })
 
+//get all stocks belonging to the user
+router.get("/email/:email/stock", async (req, res) => {
+  var { email } = req.params
+  let doc = await Stock.find({ email: email }, (err, user) => {
+    if(err){
+      res.send(err)
+    }
+    if (!user) {
+      res.send({ error: "Email does not exist" })
+    }
+  })
+  res.send(doc)
+})
 module.exports = router

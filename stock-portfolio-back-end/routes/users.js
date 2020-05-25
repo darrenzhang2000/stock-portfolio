@@ -88,6 +88,9 @@ router.get("/email/:email/balance", async (req, res) => {
 router.post("/email/:email/balance/:balance", async (req, res) => {
   var { email, balance } = req.params
   let doc = await User.findOne({ email: email }, (err, user) => {
+    if(err){
+        res.send(err)
+    }
     if (!user) {
       res.send({ error: "Email does not exist" })
     }
