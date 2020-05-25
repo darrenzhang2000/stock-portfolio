@@ -4,8 +4,8 @@ import LoginContainer from './containers/Login'
 import RegisterContainer from './containers/Register'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Portfolio from './components/Portfolio'
 import PortfolioContainer from './containers/Portfolio'
+import PurchaseContainer from './containers/Purchase';
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
       <Router>  
 
         <PortfolioContainer/>
+        <PurchaseContainer/>
 
         {/* containers all the links */}
         <Navbar/> 
