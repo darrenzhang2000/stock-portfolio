@@ -64,7 +64,11 @@ class PurchaseContainer extends React.Component {
 
           //calculate total cost
           let cost = this.state.qty * price
-          console.log(`Cost of 1 share of ${this.state.ticker} is ${cost}`)
+
+          //round cost to 2 decimal places
+          cost = cost.toFixed(2)
+          cost = parseFloat(cost)
+          console.log(`Cost of ${this.state.qty} share of ${this.state.ticker} is ${cost}`)
 
           //retrieve user from App component
           const userEmail = this.props.getUser()
@@ -80,6 +84,10 @@ class PurchaseContainer extends React.Component {
           )
           let balance = res.data.balance
           let newBalance = balance - cost
+          //round newBalance to two decimal places
+          newBalance = newBalance.toFixed(2)
+          newBalance = parseFloat(newBalance)
+          
           //if user has enough money, purchase is valid.
           if (newBalance >= 0) {
             //deduct cost from balance in db
