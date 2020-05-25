@@ -22,7 +22,6 @@ class PurchaseContainer extends React.Component {
 
   onSubmitHandler = (e) => {
     e.preventDefault()
-    console.log("onsubmit")
 
     //makes sure form fields are non-empty
     let errors = []
@@ -42,24 +41,74 @@ class PurchaseContainer extends React.Component {
           //retrieve object containing stockprices with key=time
           const stockPrices = res.data["Time Series (1min)"]
 
-          //NEED TO CONSIDER CASE IF INVALID TICKER
-
-          //retrieve the most recent stock price
-          const stockPricesKeys = Object.keys(stockPrices)
-          const mostRecentTimeSeries = stockPricesKeys[0]
-          const mostRecentStockPrice =
-            stockPrices[mostRecentTimeSeries]["4. close"]
-          return mostRecentStockPrice
+          //if ticker symbol is invalid
+          if (!stockPrices) {
+            alert("Please enter valid ticker symbol")
+            return {
+              error: true,
+              message: "invalid ticker symbol",
+            }
+          } else {
+            //retrieve the most recent stock price
+            const stockPricesKeys = Object.keys(stockPrices)
+            const mostRecentTimeSeries = stockPricesKeys[0]
+            const mostRecentStockPrice =
+              stockPrices[mostRecentTimeSeries]["4. close"]
+            return mostRecentStockPrice
+          }
         })
-        .then((price) => {
+        .then(async (price) => {
+          if (price.error) {
+            return
+          }
+
           //calculate total cost
           let cost = this.state.qty * price
-          console.log(cost)
+          console.log(`Cost of 1 share of ${this.state.ticker} is ${cost}`)
 
+          //retrieve user from App component
+          const userEmail = this.props.getUser()
+
+          //retrieve user balance from database
+          let res = await axios.get(
+            `http://localhost:5000/users/email/${userEmail}/balance`,
+            (err) => {
+              if (err) {
+                console.log(err)
+              }
+            }
+          )
+          let balance = res.data.balance
+          let newBalance = balance - cost
           //if user has enough money, purchase is valid.
-        //   axios.get(`http://localhost:5000/users/email/${email}/balance`)
-          //deduct cost from balance in db
-          //increase number of stocks in db, or store number of stocks if the user doesn't have this stock
+          if (newBalance >= 0) {
+            //deduct cost from balance in db
+            axios.post(
+              `http://localhost:5000/users/email/${userEmail}/balance/${newBalance}`,
+              (err) => {
+                if (err) {
+                  console.log(err)
+                }
+              }
+            )
+
+            //add stock to user's account
+            axios.post(
+              `http://localhost:5000/stocks/email/${userEmail}/stock/${this.state.ticker}/qty/${this.state.qty}`,
+              (err) => {
+                if (err) {
+                  console.log(err)
+                }
+              }
+            )
+
+            alert(
+              `You have successfully purchase ${this.state.qty} shares of ${this.state.ticker} for a total of \$${cost}. Your new balance is \$${newBalance}.`
+            )
+          } else {
+            //User does not have enough money
+            alert("You don't have enough money.")
+          }
         })
     }
   }
@@ -78,6 +127,5 @@ class PurchaseContainer extends React.Component {
     )
   }
 }
-
 
 export default PurchaseContainer

@@ -14,16 +14,20 @@ class App extends React.Component {
       user: ""
     }
   }
-  setUser = (email)=>{
+  setUser = (email) => {
     this.setState({user: email})
-    console.log(this.state.user)
   }
+
+  getUser = () => {
+    return this.state.user
+  }
+
   render() {
     return (
       <div className="App">
         <Router>
           <PortfolioContainer />
-          <PurchaseContainer/>
+          <PurchaseContainer getUser={this.getUser}/>
 
           {/* containers all the links */}
           <Navbar />
