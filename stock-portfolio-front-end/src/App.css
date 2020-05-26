@@ -44,3 +44,7 @@
 li {
   list-style-type: none;
 }
+
+.tableContainer {
+  width: 80%;
+}

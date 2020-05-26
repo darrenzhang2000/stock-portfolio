@@ -4,13 +4,7 @@ import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
 import Button from "@material-ui/core/Button"
-import styled from "styled-components"
 import "../styles/navbar.css"
-
-const StyledLink = styled(Link)`
-  color: palevioletred;
-  font-weight: bold;
-`;
 
 const Navbar = (props) => {
   return (
@@ -32,18 +26,12 @@ const Navbar = (props) => {
           </Button>
 
           <Button color="inherit">
-            <Link className="navlink" to="/containers/Portfolio">Portfolio</Link>
+            <Link className="navlink"to="/containers/Portfolio">Portfolio</Link>
           </Button>
 
         </Toolbar>
       </AppBar>
   )
 }
-
-// styled components
-// var StyledLink = styled(Link)`
-//   color: white;
-//   outline: none
-// `
 
 export default Navbar
