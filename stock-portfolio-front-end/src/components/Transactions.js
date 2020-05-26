@@ -1,7 +1,6 @@
 import React from "react"
 
 const Transactions = (props) => {
-    console.log(props)
   return (
     <div>
       <h1>Transactions</h1>

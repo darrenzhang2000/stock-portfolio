@@ -32,6 +32,7 @@ db.once("open", () => {
 })
 
 app.get("/", (req, res) => {
+    console.log(req)
     res.send("hello")
 })
 

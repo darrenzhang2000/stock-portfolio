@@ -1,0 +1,10 @@
+a{
+    text-decoration: none;
+
+}
+
+
+.navlink:visited {
+    outline: none;
+    color: white;
+}

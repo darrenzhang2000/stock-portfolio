@@ -14,6 +14,7 @@ class TransactionsContainer extends React.Component {
     axios
       .get(`http://localhost:5000/transactions/email/${this.props.email}`)
       .then((res) => {
+          console.log('res', res)
         var transactionHistory = Array.from(res.data.transactionHistory)
 
         //sort transaction history with most recent at the front of the array
