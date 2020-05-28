@@ -21,6 +21,7 @@ const Portfolio = (props) => {
 
   return (
     <div>
+      <h1>Portfolio</h1>
       <TableContainer component={Paper} className="tableContainer">
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
