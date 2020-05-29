@@ -1,6 +1,7 @@
 import React from "react"
 import axios from "axios"
 import Transactions from "../components/Transactions"
+import { connect } from 'react-redux'
 
 class TransactionsContainer extends React.Component {
   constructor() {
@@ -27,6 +28,7 @@ class TransactionsContainer extends React.Component {
   }
 
   render() {
+    console.log('t', this.props)
     if (this.props.email && this.state.transactionHistory == 0) {
       this.getTransactionHistory()
     }
@@ -34,4 +36,9 @@ class TransactionsContainer extends React.Component {
   }
 }
 
-export default TransactionsContainer
+function mapStateToProps(state){
+  const { user } = state
+  return user 
+}
+
+export default connect(mapStateToProps)(TransactionsContainer)

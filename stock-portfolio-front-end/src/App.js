@@ -15,62 +15,14 @@ import TransactionsContainer from "./containers/Transactions"
 import "./styles/app.css"
 
 //store
-import { createStore } from "redux"
-// import userReducer from './redux/userReducer'
-// import addUser from './redux/userReducer'
+import store from "./redux/reduxStore"
+import { addUser, removeUser } from "./redux/userReducer"
 
-const ADD_USER = "ADD_USER"
-const REMOVE_USER = "REMOVE_USER"
-
-function addUser(user) {
-  return {
-    type: ADD_USER,
-    user,
-  }
-}
-
-function removeUser() {
-  return {
-    type: REMOVE_USER,
-  }
-}
-
-const initialState = {
-  name: "",
-  email: "",
-  //balance: 5000,
-  //transactions: [],
-  //portfolio: []
-}
-
-function userReducer(state = initialState, action) {
-  switch (action.type) {
-    case ADD_USER:
-      return Object.assign({}, state, {
-        name: action.user.name,
-        email: action.user.email,
-      })
-
-    case REMOVE_USER:
-      return Object.assign({}, state, {
-        name: "",
-        email: "",
-      })
-    // if the action is not recognized, don't do anything
-    default:
-      return state
-  }
-}
-
-const store = createStore(
-  userReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
-store.dispatch(addUser({ name: "daren", email: "darrenzhang200027@gmail.com" }))
-store.dispatch(addUser({ name: "daren", email: "darrenzhang200027@gmail.com" }))
-store.dispatch(addUser({ name: "daren", email: "darrenzhang200027@gmail.com" }))
-store.dispatch(removeUser())
-console.log(store.getState())
+// store.dispatch(addUser({ name: "daren", email: "darrenzhang200027@gmail.com" }))
+// store.dispatch(addUser({ name: "daren", email: "darrenzhang200027@gmail.com" }))
+// store.dispatch(addUser({ name: "daren", email: "darrenzhang200027@gmail.com" }))
+// store.dispatch(removeUser())
+// console.log(store.getState())
 
 const ProtectedRoute = ({ children, ...rest }) => {
   return (
