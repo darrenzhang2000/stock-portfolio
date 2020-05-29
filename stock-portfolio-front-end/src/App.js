@@ -15,25 +15,14 @@ import TransactionsContainer from "./containers/Transactions"
 import "./styles/app.css"
 
 //store
-import store from "./redux/reduxStore"
-import { addUser, removeUser } from "./redux/userReducer"
+// import store from "./redux/reduxStore"
+// import { addUser, removeUser } from "./redux/userReducer"
 
 // store.dispatch(addUser({ name: "daren", email: "darrenzhang200027@gmail.com" }))
 // store.dispatch(addUser({ name: "daren", email: "darrenzhang200027@gmail.com" }))
 // store.dispatch(addUser({ name: "daren", email: "darrenzhang200027@gmail.com" }))
 // store.dispatch(removeUser())
 // console.log(store.getState())
-
-const ProtectedRoute = ({ children, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        true ? children : <Redirect to="/containers/login" />
-      }
-    />
-  )
-}
 
 class App extends React.Component {
   constructor() {
@@ -51,8 +40,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(store)
-    console.log("app user state", this.state.user)
     return (
       <div className="App">
         <Router>
@@ -85,6 +72,17 @@ class App extends React.Component {
       </div>
     )
   }
+}
+
+function ProtectedRoute({ children, ...rest }){
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        true ? children : <Redirect to="/containers/login" />
+      }
+    />
+  )
 }
 
 export default App

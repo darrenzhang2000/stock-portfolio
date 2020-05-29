@@ -1,6 +1,8 @@
 import React from "react"
 import Login from "../components/Login"
 import axios from 'axios'
+import { addUserDispatch } from '../redux/reduxStore'
+import { connect } from 'react-redux'
 
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -60,6 +62,9 @@ class LoginContainer extends React.Component {
                     }
                     //successful login: email and password match
                     else if(res.data == "Success: email and password match"){
+                        //add user to redux store
+                        addUserDispatch({ email: this.state.email, balance: 5000 })
+
                         alert("Login Successful!")
                         //pass user to login
                         this.props.setUser(this.state.email)
@@ -73,6 +78,7 @@ class LoginContainer extends React.Component {
     }
 
     render() {
+        console.log('login', this.props)
         return <Login 
         errors={this.state.errors}
         changeEmailHandler={this.changeEmailHandler}
@@ -81,4 +87,6 @@ class LoginContainer extends React.Component {
     }
 }
 
-export default LoginContainer
+const mapDispatchToProps = { addUserDispatch }
+
+export default connect(null, mapDispatchToProps)(LoginContainer)
