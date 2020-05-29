@@ -17,6 +17,8 @@ class Navbar extends React.Component {
     removeUserDispatch()
   }
 
+  redirectToSignIn = () => {}
+
   render() {
     return (
       <AppBar position="sticky">
@@ -35,20 +37,30 @@ class Navbar extends React.Component {
             </Button>
           )}
 
-          <Button color="inherit">
-            <Link className="navlink" to="/containers/Register">
-              Register
-            </Link>
-          </Button>
+          {!this.props.email ? (
+            <Button color="inherit">
+              <Link className="navlink" to="/containers/Register">
+                Register
+              </Link>
+            </Button>
+          ) : null}
 
           <Button color="inherit">
-            <Link className="navlink" to="/containers/Transactions">
+            <Link
+              className="navlink"
+              to="/containers/Transactions"
+              onClick={this.redirectToSignIn}
+            >
               Transactions
             </Link>
           </Button>
 
-          <Button color="inherit">
-            <Link className="navlink" to="/containers/Portfolio">
+          <Button color="inherit" onClick={this.redirectToSignIn}>
+            <Link
+              className="navlink"
+              to="/containers/Portfolio"
+              onClick={this.redirectToSignIn}
+            >
               Portfolio
             </Link>
           </Button>
