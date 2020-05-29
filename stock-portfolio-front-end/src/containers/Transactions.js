@@ -15,7 +15,6 @@ class TransactionsContainer extends React.Component {
     axios
       .get(`http://localhost:5000/transactions/email/${this.props.email}`)
       .then((res) => {
-          console.log('res', res)
         var transactionHistory = Array.from(res.data.transactionHistory)
 
         //sort transaction history with most recent at the front of the array
@@ -23,7 +22,6 @@ class TransactionsContainer extends React.Component {
           return t1.time < t2.time
         })
         this.setState({transactionHistory : transactionHistory})
-        console.log(this.state.transactionHistory)
       })
   }
 
@@ -36,9 +34,12 @@ class TransactionsContainer extends React.Component {
   }
 }
 
-function mapStateToProps(state){
-  const { user } = state
-  return user 
-}
+// function mapStateToProps(state){
+//   return {
+//     email: state.email,
+//     transactions: state.transactions
+//   }
+// }
 
-export default connect(mapStateToProps)(TransactionsContainer)
+// export default connect(mapStateToProps)(TransactionsContainer)
+export default TransactionsContainer

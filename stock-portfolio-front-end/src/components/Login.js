@@ -50,6 +50,7 @@ export default function SignIn(props) {
 
   return (
     <Container component="main" maxWidth="xs">
+      <p>{props.location ? props.location.state.msg : null}</p>
       <ul>
         {
           props.errors ? props.errors.map((err, i) => <li key={i}>{err.msg}</li>) : null

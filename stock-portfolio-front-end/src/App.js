@@ -13,6 +13,7 @@ import PortfolioContainer from "./containers/Portfolio"
 import PurchaseContainer from "./containers/Purchase"
 import TransactionsContainer from "./containers/Transactions"
 import "./styles/app.css"
+import { connect } from "react-redux"
 
 //store
 // import store from "./redux/reduxStore"
@@ -59,13 +60,36 @@ class App extends React.Component {
             {/* <Route path="/containers/Transactions">
               <TransactionsContainer className="top" email={this.state.user} />
             </Route> */}
-            <ProtectedRoute path="/containers/Transactions">
-              <TransactionsContainer className="top" email={this.state.user} />
-            </ProtectedRoute>
+            <Route path="/containers/Transactions">
+              {this.props.email ? (
+                <TransactionsContainer
+                  className="top"
+                  email={this.state.user}
+                />
+              ) : (
+                <Redirect
+                  to={{
+                    pathname: "/containers/Login",
+                    // state: {msg: "Please sign in to view your transactions"},
+                  }}
+                />
+              )}
+            </Route>
 
             <Route path="/containers/Portfolio">
-              <PortfolioContainer className="top" user={this.state.user} />
-              <PurchaseContainer getUser={this.getUser} />
+              {this.props.email ? (
+                <div>
+                  <PortfolioContainer className="top" user={this.state.user} />
+                  <PurchaseContainer getUser={this.getUser} />
+                </div>
+              ) : (
+                <Redirect
+                  to={{
+                    pathname: "/containers/Login",
+                    // state: {msg: "Please sign in to view your transactions"},
+                  }}
+                />
+              )}
             </Route>
           </Switch>
         </Router>
@@ -74,15 +98,21 @@ class App extends React.Component {
   }
 }
 
-function ProtectedRoute({ children, ...rest }){
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        true ? children : <Redirect to="/containers/login" />
-      }
-    />
-  )
+// function ProtectedRoute({ children, ...rest }) {
+//   return (
+//     <Route
+//       {...rest}
+//       render={(props) =>
+//         this.props.email ? children : <Redirect to="/containers/login" />
+//       }
+//     />
+//   )
+// }
+
+function mapStateToProps(state) {
+  return {
+    email: state.email,
+  }
 }
 
-export default App
+export default connect(mapStateToProps)(App)

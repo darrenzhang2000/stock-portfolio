@@ -78,6 +78,8 @@ class LoginContainer extends React.Component {
     }
 
     render() {
+        this.props.location ? console.log(this.props.location.state.msg) : console.log('nothing')
+
         console.log('login', this.props)
         return <Login 
         errors={this.state.errors}
