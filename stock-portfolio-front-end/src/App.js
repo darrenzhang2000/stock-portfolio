@@ -15,16 +15,6 @@ import TransactionsContainer from "./containers/Transactions"
 import "./styles/app.css"
 import { connect } from "react-redux"
 
-//store
-// import store from "./redux/reduxStore"
-// import { addUser, removeUser } from "./redux/userReducer"
-
-// store.dispatch(addUser({ name: "daren", email: "darrenzhang200027@gmail.com" }))
-// store.dispatch(addUser({ name: "daren", email: "darrenzhang200027@gmail.com" }))
-// store.dispatch(addUser({ name: "daren", email: "darrenzhang200027@gmail.com" }))
-// store.dispatch(removeUser())
-// console.log(store.getState())
-
 class App extends React.Component {
   constructor() {
     super()

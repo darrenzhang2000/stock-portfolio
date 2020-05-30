@@ -40,13 +40,14 @@ class PurchaseContainer extends React.Component {
       this.setState({ errors: errors })
     } else {
       //call to alpha vantage api using ticker and stock count
-      url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${this.state.ticker}&interval=1min&apikey=GYGD5L3VUM8VS4V9`
+      url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${this.state.ticker}&apikey=GYGD5L3VUM8VS4V9`
       axios
         .get(url)
         .then((res) => {
           //retrieve object containing stockprices with key=time
-          const stockPrices = res.data["Time Series (1min)"]
-        
+          const stockPrices = res.data["Global Quote"]
+          console.log('r', res.data, stockPrices)
+          
 
           //if ticker symbol is invalid
           if (!stockPrices) {
@@ -57,11 +58,7 @@ class PurchaseContainer extends React.Component {
             }
           } else {
             //retrieve the most recent stock price
-            const stockPricesKeys = Object.keys(stockPrices)
-            const mostRecentTimeSeries = stockPricesKeys[0]
-            const mostRecentStockPrice =
-              stockPrices[mostRecentTimeSeries]["4. close"]
-            return mostRecentStockPrice
+            return stockPrices['05. price']
           }
         })
         .then(async (price) => {

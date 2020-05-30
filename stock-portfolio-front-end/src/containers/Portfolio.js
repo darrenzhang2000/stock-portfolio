@@ -6,24 +6,37 @@ class PortfolioContainer extends React.Component {
   constructor() {
     super()
     this.state = {
-      stocks: []
+      stocks: [],
     }
   }
 
   updateStocks = () => {
     const url = `http://localhost:5000/stocks/email/${this.props.user}/stock`
-    axios.get(url).then((res) => {
-      this.setState({ stocks: res.data })
+    axios.get(url).then(async (res) => {
+      let stocks = res.data
+
+      //Add openingPrice and currentPrice to each stock
+      for(let i = 0; i < stocks.length; i++){
+        await axios.get(stocks[i].url).then((res) => {
+          if(res.status == 200){
+            console.log('i', res.data)
+            stocks[i]["openingPrice"] = res.data["Global Quote"]["02. open"]
+            stocks[i]["currentPrice"] = res.data["Global Quote"]["05. price"]
+          }
+        })
+      }
+
+      this.setState({ stocks: stocks })
     })
   }
   render() {
-    if(this.props.user && this.state.stocks.length == 0){
-      console.log('here')
+    if (this.props.user && this.state.stocks.length == 0) {
+      console.log("here")
       this.updateStocks()
     }
     return (
       <div>
-        <Portfolio stocks={this.state.stocks}/>
+        <Portfolio stocks={this.state.stocks} />
       </div>
     )
   }
