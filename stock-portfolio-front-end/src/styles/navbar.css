@@ -3,8 +3,13 @@ a{
 
 }
 
+.navlink {
+    outline: none;
+    color: white;
+}
 
 .navlink:visited {
     outline: none;
     color: white;
 }
+

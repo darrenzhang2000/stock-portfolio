@@ -20,7 +20,7 @@ const Portfolio = (props) => {
   const classes = useStyles()
 
   return (
-    <div>
+    <div class="table">
       <h1>Portfolio</h1>
       <TableContainer component={Paper} className="tableContainer">
         <Table className={classes.table} aria-label="simple table">

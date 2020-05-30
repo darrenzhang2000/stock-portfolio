@@ -44,6 +44,7 @@ class PurchaseContainer extends React.Component {
         .then((res) => {
           //retrieve object containing stockprices with key=time
           const stockPrices = res.data["Time Series (1min)"]
+        
 
           //if ticker symbol is invalid
           if (!stockPrices) {

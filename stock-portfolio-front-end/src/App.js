@@ -80,6 +80,20 @@ class App extends React.Component {
               {this.props.email ? (
                 <div>
                   <PortfolioContainer className="top" user={this.state.user} />
+                </div>
+              ) : (
+                <Redirect
+                  to={{
+                    pathname: "/containers/Login",
+                    // state: {msg: "Please sign in to view your transactions"},
+                  }}
+                />
+              )}
+            </Route>
+
+            <Route path="/containers/Purchase">
+              {this.props.email ? (
+                <div>
                   <PurchaseContainer getUser={this.getUser} />
                 </div>
               ) : (
@@ -91,6 +105,7 @@ class App extends React.Component {
                 />
               )}
             </Route>
+
           </Switch>
         </Router>
       </div>

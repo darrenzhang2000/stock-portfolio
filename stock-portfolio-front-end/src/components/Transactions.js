@@ -21,7 +21,7 @@ const Transactions = (props) => {
 
 
   return (
-    <div>
+    <div class="table">
       <h1>Transactions</h1>
 
       <TableContainer component={Paper} className="tableContainer">
@@ -29,9 +29,9 @@ const Transactions = (props) => {
           <TableHead>
             <TableRow>
               <TableCell>Buy / Sell</TableCell>
-              <TableCell>Stock Ticker Symbol</TableCell>
+              <TableCell align="right">Stock Ticker Symbol</TableCell>
               <TableCell align="right">Quantity Purchased/Sold</TableCell>
-              <TableCell align="right">Total Price Bought/Sold For</TableCell>
+              <TableCell align="right">Total Price</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
