@@ -25,6 +25,8 @@ class PurchaseContainer extends React.Component {
 
     //makes sure form fields are non-empty
     let errors = []
+    let url = ""
+
     if (!this.state.ticker || !this.state.qty) {
       errors.push({ msg: "Please fill in all fields" })
     }
@@ -38,7 +40,7 @@ class PurchaseContainer extends React.Component {
       this.setState({ errors: errors })
     } else {
       //call to alpha vantage api using ticker and stock count
-      const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${this.state.ticker}&interval=1min&apikey=GYGD5L3VUM8VS4V9`
+      url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${this.state.ticker}&interval=1min&apikey=GYGD5L3VUM8VS4V9`
       axios
         .get(url)
         .then((res) => {
@@ -110,6 +112,9 @@ class PurchaseContainer extends React.Component {
             //add stock to user's account
             axios.post(
               `http://localhost:5000/stocks/email/${userEmail}/stock/${this.state.ticker}/qty/${this.state.qty}`,
+              {
+                url: url
+              },
               (err) => {
                 if (err) {
                   console.log(err)
@@ -120,6 +125,9 @@ class PurchaseContainer extends React.Component {
             //record transaction
             axios.post(
               `http://localhost:5000/transactions/email/${userEmail}/stock/${this.state.ticker}/qty/${this.state.qty}/cost/${cost}`,
+              {
+                url: url
+              },
               (err) => {
                 if (err) {
                   console.log(err)

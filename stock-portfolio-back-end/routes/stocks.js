@@ -17,6 +17,7 @@ router.get("/email/:email/stock/:tickerSymb", async (req, res) => {
 //update user's stock count
 router.post("/email/:email/stock/:tickerSymb/qty/:qty", async (req, res) => {
   var { email, tickerSymb, qty } = req.params
+  var { url } = req.body
 
   Stock.findOne(
     { email: email, tickerSymb: tickerSymb },
@@ -34,6 +35,7 @@ router.post("/email/:email/stock/:tickerSymb/qty/:qty", async (req, res) => {
           tickerSymb: tickerSymb,
           email: email,
           qty: qty,
+          url: url
         })
         stock.save((err) => {
           if (err) {

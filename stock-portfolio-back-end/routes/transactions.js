@@ -16,12 +16,13 @@ router.get("/email/:email", (req, res) => {
   })
 })
 
-// http://localhost:5000/transactions/email/:email/stock/:tickerSymb/qty/:qty/cost/:cost
+// http://localhost:5000/transactions/email/:email/stock/:tickerSymb/qty/:qty/cost/:cost/url/:url
 //add a user's transaction into the db
 router.post(
   "/email/:email/stock/:tickerSymb/qty/:qty/cost/:cost",
   async (req, res) => {
-    var { email, tickerSymb, qty, cost } = req.params
+    var { email, tickerSymb, qty, cost, url } = req.params
+    var { url } = req.body
 
     //create transaction
     const transaction = new Transaction({
@@ -29,6 +30,7 @@ router.post(
       tickerSymb,
       qty,
       cost,
+      url
     })
 
     //save transaction into database

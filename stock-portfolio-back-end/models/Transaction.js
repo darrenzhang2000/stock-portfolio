@@ -8,7 +8,8 @@ const transactionSchema = new mongoose.Schema({
   time: {
       type: Date,
       default: Date.now
-  }
+  },
+  url: String
 })
 
 module.exports = mongoose.model("Transaction", transactionSchema)
