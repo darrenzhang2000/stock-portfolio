@@ -9,6 +9,7 @@ import {
   Redirect,
 } from "react-router-dom"
 import Navbar from "./components/Navbar"
+import Home from "./components/Home"
 import PortfolioContainer from "./containers/Portfolio"
 import PurchaseContainer from "./containers/Purchase"
 import TransactionsContainer from "./containers/Transactions"
@@ -36,9 +37,14 @@ class App extends React.Component {
         <Router>
           {/* containers all the links */}
           <Navbar className="navbar" />
-
+      
           {/* Looks through the child <Routes>s and returns the first one that matches the URL */}
           <Switch>
+
+            <Route path="/components/Home">
+              <Home className="top"/>
+            </Route>
+
             <Route path="/containers/Login">
               <LoginContainer className="top" setUser={this.setUser} />
             </Route>
@@ -102,17 +108,6 @@ class App extends React.Component {
     )
   }
 }
-
-// function ProtectedRoute({ children, ...rest }) {
-//   return (
-//     <Route
-//       {...rest}
-//       render={(props) =>
-//         this.props.email ? children : <Redirect to="/containers/login" />
-//       }
-//     />
-//   )
-// }
 
 function mapStateToProps(state) {
   return {

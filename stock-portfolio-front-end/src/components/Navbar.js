@@ -22,13 +22,14 @@ class Navbar extends React.Component {
     return (
       <AppBar position="sticky">
         <Toolbar>
-          <Grid
-            container
-            justify="space-between" 
-            alighContent="flex-end"
-          >
+          <Grid container justify="space-between" alighContent="flex-end">
             <Grid item xm={12}>
-              <Typography variant="h6">Stock Portfolio</Typography>
+              <Typography variant="h6">
+                <Link className="navlink" to="../components/Home">
+                  {" "}
+                  Stock Portfolio
+                </Link>
+              </Typography>
             </Grid>
 
             <Grid item>
