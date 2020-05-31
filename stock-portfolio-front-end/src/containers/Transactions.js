@@ -26,7 +26,6 @@ class TransactionsContainer extends React.Component {
   }
 
   render() {
-    console.log('t', this.props)
     if (this.props.email && this.state.transactionHistory == 0) {
       this.getTransactionHistory()
     }

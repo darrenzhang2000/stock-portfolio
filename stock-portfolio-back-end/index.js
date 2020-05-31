@@ -1,5 +1,7 @@
 const express = require("express")
 const app = express()
+const port = process.env.PORT || 5000
+
 
 // parse application/x-www-form-encoded and application/json
 const bodyParser = require('body-parser')
@@ -40,4 +42,8 @@ app.use('/users', users)
 app.use('/stocks', stocks)
 app.use('/transactions', transactions)
 
-app.listen(5000, () => console.log("listening at port 5000"))
+let staticServe = express.static(path.join(__dirname, '../stock-portfolio-frontend/build'))
+app.use("/", staticServe)
+app.use("*", staticServe)
+
+app.listen(port, () => console.log("listening at port 5000"))

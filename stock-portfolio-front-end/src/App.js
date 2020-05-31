@@ -37,12 +37,11 @@ class App extends React.Component {
         <Router>
           {/* containers all the links */}
           <Navbar className="navbar" />
-      
+
           {/* Looks through the child <Routes>s and returns the first one that matches the URL */}
           <Switch>
-
             <Route path="/components/Home">
-              <Home className="top"/>
+              <Home className="top" />
             </Route>
 
             <Route path="/containers/Login">
@@ -53,55 +52,17 @@ class App extends React.Component {
               <RegisterContainer className="top" />
             </Route>
 
-            {/* <Route path="/containers/Transactions">
-              <TransactionsContainer className="top" email={this.state.user} />
-            </Route> */}
             <Route path="/containers/Transactions">
-              {this.props.email ? (
-                <TransactionsContainer
-                  className="top"
-                  email={this.state.user}
-                />
-              ) : (
-                <Redirect
-                  to={{
-                    pathname: "/containers/Login",
-                    // state: {msg: "Please sign in to view your transactions"},
-                  }}
-                />
-              )}
+              <TransactionsContainer className="top" email={this.props.email} />
             </Route>
 
             <Route path="/containers/Portfolio">
-              {this.props.email ? (
-                <div>
-                  <PortfolioContainer className="top" user={this.state.user} />
-                </div>
-              ) : (
-                <Redirect
-                  to={{
-                    pathname: "/containers/Login",
-                    // state: {msg: "Please sign in to view your transactions"},
-                  }}
-                />
-              )}
+              <PortfolioContainer className="top" user={this.state.user} />
             </Route>
 
             <Route path="/containers/Purchase">
-              {this.props.email ? (
-                <div>
-                  <PurchaseContainer getUser={this.getUser} />
-                </div>
-              ) : (
-                <Redirect
-                  to={{
-                    pathname: "/containers/Login",
-                    // state: {msg: "Please sign in to view your transactions"},
-                  }}
-                />
-              )}
+              <PurchaseContainer getUser={this.getUser} />
             </Route>
-
           </Switch>
         </Router>
       </div>
