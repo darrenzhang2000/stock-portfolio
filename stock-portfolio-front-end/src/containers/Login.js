@@ -29,7 +29,6 @@ class LoginContainer extends React.Component {
 
     onSubmitHandler = (e) => {
         e.preventDefault()
-        console.log("form submitted")
 
         //form validation 
         this.setState({errors: []}) //clears existing errors if any
@@ -80,7 +79,6 @@ class LoginContainer extends React.Component {
     render() {
         this.props.location ? console.log(this.props.location.state.msg) : console.log('nothing')
 
-        console.log('login', this.props)
         return <Login 
         errors={this.state.errors}
         changeEmailHandler={this.changeEmailHandler}

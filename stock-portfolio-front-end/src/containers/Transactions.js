@@ -34,12 +34,4 @@ class TransactionsContainer extends React.Component {
   }
 }
 
-// function mapStateToProps(state){
-//   return {
-//     email: state.email,
-//     transactions: state.transactions
-//   }
-// }
-
-// export default connect(mapStateToProps)(TransactionsContainer)
 export default TransactionsContainer

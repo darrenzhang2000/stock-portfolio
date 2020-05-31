@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%", 
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -74,16 +74,7 @@ const Purchase = (props) => {
             autoFocus
             onChange={props.onTickerChange}
           />
-          {/* <label>
-            Transfer
-            <input
-              type="text"
-              id="ticker"
-              name="ticker"
-              placeholder="Ticker"
-              onChange={props.onTickerChange}
-            />
-          </label> */}
+
         </div>
         <div>
 
@@ -99,18 +90,9 @@ const Purchase = (props) => {
             autoComplete="qty"
             onChange={props.onQtyChange}
           />          
-          {/* <label>
-            Quantity
-            <input
-              type="text"
-              id="qty"
-              name="qty"
-              placeholder="Qty"
-              onChange={props.onQtyChange}
-            />
-          </label> */}
+  
         </div>
-        {/* <input type="submit" /> */}
+
         <Button
             type="submit"
             fullWidth

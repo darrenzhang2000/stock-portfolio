@@ -12,12 +12,10 @@ class PurchaseContainer extends React.Component {
   }
   onTickerChange = (e) => {
     this.setState({ ticker: e.target.value })
-    console.log(this.state.ticker)
   }
 
   onQtyChange = (e) => {
     this.setState({ qty: parseInt(e.target.value) })
-    console.log(this.state.qty)
   }
 
   onSubmitHandler = (e) => {
@@ -46,9 +44,7 @@ class PurchaseContainer extends React.Component {
         .then((res) => {
           //retrieve object containing stockprices with key=time
           const stockPrices = res.data
-          console.log('r', res.data)
           
-
           //if ticker symbol is invalid
           if (!stockPrices) {
             alert("Please enter valid ticker symbol")
@@ -72,9 +68,6 @@ class PurchaseContainer extends React.Component {
           //round cost to 2 decimal places
           cost = cost.toFixed(2)
           cost = parseFloat(cost)
-          console.log(
-            `Cost of ${this.state.qty} share of ${this.state.ticker} is ${cost}`
-          )
 
           //retrieve user from App component
           const userEmail = this.props.getUser()
