@@ -20,8 +20,8 @@ class PortfolioContainer extends React.Component {
         await axios.get(stocks[i].url).then((res) => {
           if(res.status == 200){
             console.log('i', res.data)
-            stocks[i]["openingPrice"] = res.data["Global Quote"]["02. open"]
-            stocks[i]["currentPrice"] = res.data["Global Quote"]["05. price"]
+            stocks[i]["openingPrice"] = res.data["open"]
+            stocks[i]["currentPrice"] = res.data["latestPrice"]
           }
         })
       }
@@ -31,7 +31,6 @@ class PortfolioContainer extends React.Component {
   }
   render() {
     if (this.props.user && this.state.stocks.length == 0) {
-      console.log("here")
       this.updateStocks()
     }
     return (

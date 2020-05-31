@@ -40,13 +40,13 @@ class PurchaseContainer extends React.Component {
       this.setState({ errors: errors })
     } else {
       //call to alpha vantage api using ticker and stock count
-      url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${this.state.ticker}&apikey=GYGD5L3VUM8VS4V9`
+      url = `https://cloud.iexapis.com/stable/stock/${this.state.ticker}/quote?token=pk_14ce505b6dd1448cad3d754e27cb2ebd`
       axios
         .get(url)
         .then((res) => {
           //retrieve object containing stockprices with key=time
-          const stockPrices = res.data["Global Quote"]
-          console.log('r', res.data, stockPrices)
+          const stockPrices = res.data
+          console.log('r', res.data)
           
 
           //if ticker symbol is invalid
@@ -58,7 +58,7 @@ class PurchaseContainer extends React.Component {
             }
           } else {
             //retrieve the most recent stock price
-            return stockPrices['05. price']
+            return stockPrices['latestPrice']
           }
         })
         .then(async (price) => {
@@ -144,7 +144,6 @@ class PurchaseContainer extends React.Component {
   }
 
   render() {
-    //https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=1min&apikey=GYGD5L3VUM8VS4V9
     return (
       <div>
         <Purchase
