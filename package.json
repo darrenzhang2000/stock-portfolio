@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd stock-portfolio-back-end && npm install && npm rebuild"
+    "build": "cd stock-portfolio-back-end && npm install && npm install --unsafe-perms"
   },
   "repository": {
     "type": "git",
