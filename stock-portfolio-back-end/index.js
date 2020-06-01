@@ -34,11 +34,6 @@ db.once("open", () => {
     console.log("connected to db")
 })
 
-app.get("/", (req, res) => {
-    console.log(req)
-    res.send("hello")
-})
-
 app.use('/users', users)
 app.use('/stocks', stocks)
 app.use('/transactions', transactions)
