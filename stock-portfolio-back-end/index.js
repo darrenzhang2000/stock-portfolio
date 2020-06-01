@@ -38,7 +38,7 @@ app.use('/users', users)
 app.use('/stocks', stocks)
 app.use('/transactions', transactions)
 
-let staticServe = express.static(path.join(__dirname, '../stock-portfolio-frontend/build'))
+let staticServe = express.static(path.join(__dirname, '../stock-portfolio-front-end/build'))
 app.use("/", staticServe)
 app.use("*", staticServe)
 
