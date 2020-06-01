@@ -23,6 +23,7 @@ app.use(cors())
 //connect to mongoose
 const mongoose = require("mongoose")
 mongoose.connect(
+    process.env.MONGODB_URI ||
     "mongodb+srv://darren:test123@cluster0-evjbm.mongodb.net/test?retryWrites=true&w=majority",
     { useNewUrlParser: true }
 )
