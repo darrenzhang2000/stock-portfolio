@@ -11,7 +11,8 @@ class PortfolioContainer extends React.Component {
   }
 
   updateStocks = () => {
-    const url = `http://localhost:5000/stocks/email/${this.props.user}/stock`
+    // const url = `http://localhost:5000/stocks/email/${this.props.user}/stock`
+    const url = `/stocks/email/${this.props.user}/stock`
     axios.get(url).then(async (res) => {
       let stocks = res.data
 

@@ -46,7 +46,7 @@ class LoginContainer extends React.Component {
 
         //if no errors, check authentication by making an axios get request
         if(!errors.length){
-            const url = `http://localhost:5000/users/login/email/${this.state.email}/password/${this.state.password}`
+            const url = `/users/login/email/${this.state.email}/password/${this.state.password}`
             axios.get(url)
                 .then(res => {
                     //email not in db

@@ -13,7 +13,7 @@ class TransactionsContainer extends React.Component {
 
   getTransactionHistory = () => {
     axios
-      .get(`http://localhost:5000/transactions/email/${this.props.email}`)
+      .get(`/transactions/email/${this.props.email}`)
       .then((res) => {
         var transactionHistory = Array.from(res.data.transactionHistory)
 

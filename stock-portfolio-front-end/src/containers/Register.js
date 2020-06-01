@@ -62,7 +62,7 @@ class RegisterContainer extends React.Component {
 
         //if no errors, add user to db by making an axios call to backend server 
         if(!errors.length){
-        axios.post('http://localhost:5000/users/register', {user})
+        axios.post('/users/register', {user})
             .then(res => {
                 //check if email already exists in db
                 if(res.data =="Email already exists"){

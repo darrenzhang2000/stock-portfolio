@@ -42,4 +42,4 @@ let staticServe = express.static(path.join(__dirname, '../stock-portfolio-front-
 app.use("/", staticServe)
 app.use("*", staticServe)
 
-app.listen(port, () => console.log("listening at port 5000"))
+app.listen(port, () => console.log(`listening at port ${port}`))

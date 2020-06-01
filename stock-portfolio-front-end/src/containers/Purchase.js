@@ -74,7 +74,7 @@ class PurchaseContainer extends React.Component {
 
           //retrieve user balance from database
           let res = await axios.get(
-            `http://localhost:5000/users/email/${userEmail}/balance`,
+            `/users/email/${userEmail}/balance`,
             (err) => {
               if (err) {
                 console.log(err)
@@ -91,7 +91,7 @@ class PurchaseContainer extends React.Component {
           if (newBalance >= 0) {
             //deduct cost from balance in db
             axios.post(
-              `http://localhost:5000/users/email/${userEmail}/balance/${newBalance}`,
+              `/users/email/${userEmail}/balance/${newBalance}`,
               (err) => {
                 if (err) {
                   console.log(err)
@@ -101,7 +101,7 @@ class PurchaseContainer extends React.Component {
 
             //add stock to user's account
             axios.post(
-              `http://localhost:5000/stocks/email/${userEmail}/stock/${this.state.ticker}/qty/${this.state.qty}`,
+              `/stocks/email/${userEmail}/stock/${this.state.ticker}/qty/${this.state.qty}`,
               {
                 url: url
               },
@@ -114,7 +114,7 @@ class PurchaseContainer extends React.Component {
 
             //record transaction
             axios.post(
-              `http://localhost:5000/transactions/email/${userEmail}/stock/${this.state.ticker}/qty/${this.state.qty}/cost/${cost}`,
+              `/transactions/email/${userEmail}/stock/${this.state.ticker}/qty/${this.state.qty}/cost/${cost}`,
               {
                 url: url
               },
