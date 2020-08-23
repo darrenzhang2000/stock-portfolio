@@ -1,6 +1,8 @@
 import React from "react"
 import Register from "../components/Register"
 import axios from 'axios'
+import { connect } from "react-redux";
+import { storePageName } from '../redux/actionCreators'
 
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -47,40 +49,44 @@ class RegisterContainer extends React.Component {
         let user = { ...this.state }
 
         //form validation 
-        this.setState({errors: []}) //clears existing errors if any
+        this.setState({ errors: [] }) //clears existing errors if any
         let errors = []
-        
+
         //all fields non-empty
-        if(!this.state.name || !this.state.email || !this.state.password){
+        if (!this.state.name || !this.state.email || !this.state.password) {
             errors.push({ msg: 'Please fill in all fields' })
         }
 
         //check if valid email
-        if(!validateEmail(this.state.email)){
-            errors.push({ msg: "Please enter valid email address"})
+        if (!validateEmail(this.state.email)) {
+            errors.push({ msg: "Please enter valid email address" })
         }
 
         //if no errors, add user to db by making an axios call to backend server 
-        if(!errors.length){
-        axios.post('http://localhost:5000/users/register', {user})
-            .then(res => {
-                //check if email already exists in db
-                if(res.data =="Email already exists"){
-                    errors.push({msg: "Email already exists"})
-                    //re-direct to same page with error and original data 
-                    this.setState({ errors: errors })
-                }
-                else{
-                    //success
-                    alert('You have successfully registered')
-                    //redirect to home page
-                }
-            })
+        if (!errors.length) {
+            axios.post('http://localhost:5000/users/register', { user })
+                .then(res => {
+                    //check if email already exists in db
+                    if (res.data == "Email already exists") {
+                        errors.push({ msg: "Email already exists" })
+                        //re-direct to same page with error and original data 
+                        this.setState({ errors: errors })
+                    }
+                    else {
+                        //success
+                        alert('You have successfully registered')
+                        //redirect to home page
+                    }
+                })
         }
-        else{
+        else {
             //if there are errors, re-direct to the same page with errors and original data
             this.setState({ errors: errors })
         }
+    }
+
+    componentDidMount() {
+        this.props.storePageName('Register')
     }
 
     render() {
@@ -100,4 +106,8 @@ class RegisterContainer extends React.Component {
     }
 }
 
-export default RegisterContainer
+const mapStateToProps = {
+    storePageName
+}
+
+export default connect(null, mapStateToProps)(RegisterContainer)

@@ -1,6 +1,8 @@
 import React from "react"
 import Purchase from "../components/Purchase"
 import axios from "axios"
+import { connect } from "react-redux"
+import { storePageName } from '../redux/actionCreators'
 
 class PurchaseContainer extends React.Component {
   constructor() {
@@ -136,6 +138,10 @@ class PurchaseContainer extends React.Component {
     }
   }
 
+  componentDidMount(){
+    this.props.storePageName("Purchase")
+  }
+
   render() {
     return (
       <div>
@@ -150,4 +156,7 @@ class PurchaseContainer extends React.Component {
   }
 }
 
-export default PurchaseContainer
+const mapStateToProps = {
+  storePageName
+}
+export default connect(null, mapStateToProps)(PurchaseContainer)
