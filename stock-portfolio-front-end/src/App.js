@@ -18,6 +18,7 @@ import "./styles/app.css"
 import { MuiThemeProvider, CssBaseline } from "@material-ui/core"
 import theme from './utilities/CustomTheme'
 import MiniDrawer from "./components/MiniDrawer"
+import CustomizedSnackbar from "./utilities/CustomizedSnackbar"
 class App extends React.Component {
   constructor() {
     super()
@@ -36,6 +37,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <CustomizedSnackbar/>
         <CssBaseline />
         <MuiThemeProvider theme={theme}>
 

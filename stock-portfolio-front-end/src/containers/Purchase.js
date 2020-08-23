@@ -2,7 +2,7 @@ import React from "react"
 import Purchase from "../components/Purchase"
 import axios from "axios"
 import { connect } from "react-redux"
-import { storePageName } from '../redux/actionCreators'
+import { storePageName, setSnackbarState } from '../redux/actionCreators'
 
 class PurchaseContainer extends React.Component {
   constructor() {
@@ -140,6 +140,7 @@ class PurchaseContainer extends React.Component {
 
   componentDidMount(){
     this.props.storePageName("Purchase")
+    this.props.setSnackbarState(true, "hi", 'error')
   }
 
   render() {
@@ -157,6 +158,7 @@ class PurchaseContainer extends React.Component {
 }
 
 const mapStateToProps = {
-  storePageName
+  storePageName,
+  setSnackbarState
 }
 export default connect(null, mapStateToProps)(PurchaseContainer)

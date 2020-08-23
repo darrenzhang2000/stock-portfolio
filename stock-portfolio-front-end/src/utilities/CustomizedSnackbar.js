@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CustomSnackbarContentWrapper from './CustomSnackbarContent'
-import { setCloseSnackbar } from '../../layoutHelpers/action'
+import { setCloseSnackbar } from '../redux/actionCreators'
 
 const CustomizedSnackbar = (props) => {
-    const { openSnackbar } = useSelector(state => state.layoutHelper)
+    const { openSnackbar } = useSelector(state => state.layoutReducer)
 
     const dispatch = useDispatch()
 

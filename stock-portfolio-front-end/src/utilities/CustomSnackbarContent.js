@@ -48,7 +48,7 @@ const snackbarContentStyles = theme => ({
 const CustomSnackbarContent = (props) => {
     const { classes, className, message, handleClose, ...other } = props;
     
-    const { snackbarMessage, snackbarVariant } = useSelector(state => state.layoutHelper)
+    const { snackbarMessage, snackbarVariant } = useSelector(state => state.layoutReducer)
 
     const Icon = variantIcon[snackbarVariant]
 
