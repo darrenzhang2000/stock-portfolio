@@ -15,8 +15,9 @@ import RegisterContainer from "./containers/Register"
 import TransactionsContainer from "./containers/Transactions"
 import Layout from './components/Layout'
 import "./styles/app.css"
-import { MuiThemeProvider } from "@material-ui/core"
+import { MuiThemeProvider, CssBaseline } from "@material-ui/core"
 import theme from './utilities/CustomTheme'
+import MiniDrawer from "./components/MiniDrawer"
 class App extends React.Component {
   constructor() {
     super()
@@ -35,39 +36,43 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <CssBaseline />
         <MuiThemeProvider theme={theme}>
 
 
           <Router>
-            <Layout />
-            {/* <Navbar className="navbar" /> */}
+            <MiniDrawer>
+            {/* <Layout> */}
+              {/* <Navbar className="navbar" /> */}
 
 
-            <Switch>
-              <Route path="/components/Home">
-                <Home className="top" />
-              </Route>
+              <Switch>
+                <Route path="/components/Home">
+                  <Home className="top" />
+                </Route>
 
-              <Route path="/containers/Login">
-                <LoginContainer className="top" setUser={this.setUser} />
-              </Route>
+                <Route path="/containers/Login">
+                  <LoginContainer className="top" setUser={this.setUser} />
+                </Route>
 
-              <Route path="/containers/Register">
-                <RegisterContainer className="top" />
-              </Route>
+                <Route path="/containers/Register">
+                  <RegisterContainer className="top" />
+                </Route>
 
-              <Route path="/containers/Transactions">
-                <TransactionsContainer className="top" email={this.props.email} />
-              </Route>
+                <Route path="/containers/Transactions">
+                  <TransactionsContainer className="top" email={this.props.email} />
+                </Route>
 
-              <Route path="/containers/Portfolio">
-                <PortfolioContainer className="top" user={this.state.user} />
-              </Route>
+                <Route path="/containers/Portfolio">
+                  <PortfolioContainer className="top" user={this.state.user} />
+                </Route>
 
-              <Route path="/containers/Purchase">
-                <PurchaseContainer getUser={this.getUser} />
-              </Route>
-            </Switch>
+                <Route path="/containers/Purchase">
+                  <PurchaseContainer getUser={this.getUser} />
+                </Route>
+              </Switch>
+            {/* </Layout> */}
+            </MiniDrawer>
           </Router>
         </MuiThemeProvider>
       </div>

@@ -1,22 +1,29 @@
-import React, { Fragment, useState } from 'react'
-import { Drawer, MenuList, MenuItem, withStyles, IconButton, AppBar, Toolbar, Typography, Button, ListItemIcon, ListItemText } from '@material-ui/core'
-import { Link } from "react-router-dom"
-import classNames from 'classnames';
-import '../styles/Layout.scss'
-import Navbar from './Navbar';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import MenuIcon from '@material-ui/icons/Menu'
-import ReceiptIcon from '@material-ui/icons/Receipt';
+import { MenuItem, MenuList, Button } from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Drawer from '@material-ui/core/Drawer';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import FolderIcon from '@material-ui/icons/Folder';
+import MenuIcon from '@material-ui/icons/Menu';
+import ReceiptIcon from '@material-ui/icons/Receipt';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-const drawerWidth = 240
+import clsx from 'clsx';
+import React from 'react';
+import { Link } from "react-router-dom";
+import '../styles/Layout.scss';
 
-const styles = theme => ({
+const drawerWidth = 240;
+
+const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1,
-        zIndex: 1,
-        position: 'relative',
         display: 'flex',
     },
     appBar: {
@@ -35,88 +42,86 @@ const styles = theme => ({
         }),
     },
     menuButton: {
-        marginLeft: 12,
         marginRight: 36,
     },
     hide: {
         display: 'none',
     },
-    drawerPaper: {
-        // position: 'relative',
+    drawer: {
+        width: drawerWidth,
+        flexShrink: 0,
         whiteSpace: 'nowrap',
+    },
+    drawerOpen: {
         width: drawerWidth,
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
     },
-    drawerPaperClose: {
-        overflowX: 'hidden',
+    drawerClose: {
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        //width: theme.spacing.unit * 7,
-        width: 72,
+        overflowX: 'hidden',
+        width: theme.spacing(7) + 1,
         [theme.breakpoints.up('sm')]: {
-            width: theme.spacing.unit * 9,
+            width: theme.spacing(9) + 1,
         },
     },
     toolbar: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        padding: '0 8px',
+        padding: theme.spacing(0, 1),
+        // necessary for content to be below app bar
         ...theme.mixins.toolbar,
     },
     content: {
         flexGrow: 1,
-        backgroundColor: theme.palette.background.default,
-        padding: theme.spacing.unit * 3,
-        height: '100vh',
-        overflow: 'auto',
+        padding: theme.spacing(3),
     },
-    listItemIcon: {
-        rounded: true
-    },
+}));
 
-})
-
-const Layout = (props) => {
-    const { classes, children, theme } = props
-
-    const [open, setOpen] = useState(true)
-
-    const handleDrawerClose = () => {
-        setOpen(false)
-    }
+export default function MiniDrawer(props) {
+    const { children } = props
+    const classes = useStyles();
+    const theme = useTheme();
+    const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
-        setOpen(true)
-    }
+        setOpen(true);
+    };
 
-    return <Fragment>
+    const handleDrawerClose = () => {
+        setOpen(false);
+    };
 
-        <div classes={classes.root}>
+    return (
+        <div className={classes.root}>
+            <CssBaseline />
             <AppBar
-                position="absolute"
-                className={classNames(classes.appBar, open && classes.appBarShift)}
+                position="fixed"
+                className={clsx(classes.appBar, {
+                    [classes.appBarShift]: open,
+                })}
             >
-                <Toolbar disableGutters={!open} >
+                <Toolbar>
                     <IconButton
                         color="inherit"
+                        aria-label="open drawer"
                         onClick={handleDrawerOpen}
-                        className={classNames(classes.menuButton, open && classes.hide)}
+                        edge="start"
+                        className={clsx(classes.menuButton, {
+                            [classes.hide]: open,
+                        })}
                     >
                         <MenuIcon />
                     </IconButton>
-
-                    <Typography style={{ flexGrow: 1, textAlign: 'left' }} color="inherit" noWrap>
+                    <Typography variant="h6" noWrap style={{ flexGrow: 1 }}>
                         Stockfolio
-                    </Typography>
-                    {/* {!this.props.isAuth ? null : <Button onClick={this.handleLogOut}><Typography
-                        style={{ color: 'white', textTransform: 'none', paddingRight: "10px" }}
-                    >Log Out</Typography></Button>} */}
+          </Typography>
                     <Button color="inherit">
                         <Link className="navlink" to="/containers/Login">
                             Login
@@ -135,18 +140,23 @@ const Layout = (props) => {
             </AppBar>
             <Drawer
                 variant="permanent"
+                className={clsx(classes.drawer, {
+                    [classes.drawerOpen]: open,
+                    [classes.drawerClose]: !open,
+                })}
                 classes={{
-                    paper: classNames(classes.drawerPaper, !open && classes.drawerPaperClose),
+                    paper: clsx({
+                        [classes.drawerOpen]: open,
+                        [classes.drawerClose]: !open,
+                    }),
                 }}
-                open={open}
             >
                 <div className={classes.toolbar}>
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                     </IconButton>
                 </div>
-
-                <MenuList>
+                <List>
                     <MenuItem component={Link} to="/containers/Transactions" className={classes.menuItem}>
                         <ListItemIcon>
                             <ReceiptIcon />
@@ -165,7 +175,8 @@ const Layout = (props) => {
                         </ListItemIcon>
                         <ListItemText primary="Purchase" />
                     </MenuItem>
-                </MenuList>
+                </List>
+
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
@@ -182,7 +193,5 @@ const Layout = (props) => {
                 </div>
             </main>
         </div>
-    </Fragment>
+    );
 }
-
-export default withStyles(styles, { withTheme: true })(Layout)

@@ -31,13 +31,19 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    padding: theme.spacing.unit * 6,
+    paddingBottom: theme.spacing.unit * 15,
+    textAlign: "left",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    width: '100%'
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '90%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
