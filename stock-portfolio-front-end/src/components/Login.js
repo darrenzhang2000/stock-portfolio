@@ -96,10 +96,10 @@ export default function SignIn(props) {
               autoComplete="current-password"
               onChange={props.changePasswordHandler}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
@@ -109,7 +109,7 @@ export default function SignIn(props) {
             >
               Sign In
           </Button>
-            <Grid container>
+            {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
@@ -120,12 +120,12 @@ export default function SignIn(props) {
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
-            </Grid>
+            </Grid> */}
           </form>
         </div>
-        <Box mt={8}>
+        {/* <Box mt={8}>
           <Copyright />
-        </Box>
+        </Box> */}
       </Container>
     </Paper>
   );

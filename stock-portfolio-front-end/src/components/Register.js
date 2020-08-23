@@ -29,10 +29,6 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    // marginTop: theme.spacing(8),
-    // display: 'flex',
-    // flexDirection: 'column',
-    // alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -126,12 +122,12 @@ export default function SignUp(props) {
                 onChange={props.changePasswordHandler}
               />
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
-            </Grid>
+            </Grid> */}
           </Grid>
           <Button
             type="submit"
@@ -140,7 +136,7 @@ export default function SignUp(props) {
             color="primary"
             className={classes.submit}
           >
-            Sign Upl
+            Sign Up
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
@@ -151,9 +147,9 @@ export default function SignUp(props) {
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
+      {/* <Box mt={5}>
         <Copyright />
-      </Box>
+      </Box> */}
     </Container>
     </Paper>
   );
