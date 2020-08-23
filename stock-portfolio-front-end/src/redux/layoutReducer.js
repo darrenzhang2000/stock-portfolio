@@ -1,19 +1,14 @@
-const STORE_PAGE_NAME = "STORE_PAGE_NAME"
+import Actions from './actions'
 
 const initalState = {
     pageName: ""
 }
 
-const storePageName = pageName => ({
-    type: storePageName,
-    pageName: pageName
-})
-
-
 export default function (state = initalState, action) {
     const { payload } = action
     switch (action.type) {
-        case STORE_PAGE_NAME:
+        case Actions.STORE_PAGE_NAME:
+            console.log('store hit', payload)
             return {
                 ...state,
                 pageName: payload.pageName

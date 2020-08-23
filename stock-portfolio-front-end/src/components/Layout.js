@@ -10,6 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import FolderIcon from '@material-ui/icons/Folder';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { useSelector } from 'react-redux';
 const drawerWidth = 240
 
 const styles = theme => ({
@@ -83,6 +84,8 @@ const styles = theme => ({
 })
 
 const Layout = (props) => {
+    const pageName = useSelector(state => state.layoutReducer.pageName)
+
     const { classes, children, theme } = props
 
     const [open, setOpen] = useState(true)
@@ -175,7 +178,7 @@ const Layout = (props) => {
                             {/* <div style={{ width: 'auto', textAlign: 'center', padding: '20px' }}>
                                 <img src={""} alt="logo" style={{ maxWidth: '100%', height: '30px' }} />
                             </div> */}
-                            <h1 className="App-title">{"Page Name"}</h1>
+                            <h1 className="App-title">{} zzz</h1>
                         </div>
                     </header>
                     {children}

@@ -19,6 +19,7 @@ import clsx from 'clsx';
 import React from 'react';
 import { Link } from "react-router-dom";
 import '../styles/Layout.scss';
+import { useDispatch, useSelector } from 'react-redux';
 
 const drawerWidth = 240;
 
@@ -85,6 +86,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MiniDrawer(props) {
+    const dispatch = useDispatch()
+    const pageName = useSelector(state => state.layoutReducer.pageName)
     const { children } = props
     const classes = useStyles();
     const theme = useTheme();
@@ -186,7 +189,7 @@ export default function MiniDrawer(props) {
                             {/* <div style={{ width: 'auto', textAlign: 'center', padding: '20px' }}>
                                 <img src={""} alt="logo" style={{ maxWidth: '100%', height: '30px' }} />
                             </div> */}
-                            <h1 className="App-title">{"Page Name"}</h1>
+                            <h1 className="App-title">{pageName}</h1>
                         </div>
                     </header>
                     {children}

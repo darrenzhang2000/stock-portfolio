@@ -1,6 +1,8 @@
 import React from "react"
 import axios from "axios"
 import Portfolio from "../components/Portfolio"
+import { connect } from "react-redux"
+import { storePageName } from '../redux/actionCreators'
 
 class PortfolioContainer extends React.Component {
   constructor() {
@@ -16,9 +18,9 @@ class PortfolioContainer extends React.Component {
       let stocks = res.data
 
       //Add openingPrice and currentPrice to each stock
-      for(let i = 0; i < stocks.length; i++){
+      for (let i = 0; i < stocks.length; i++) {
         await axios.get(stocks[i].url).then((res) => {
-          if(res.status == 200){
+          if (res.status == 200) {
             console.log('i', res.data)
             stocks[i]["openingPrice"] = res.data["open"]
             stocks[i]["currentPrice"] = res.data["latestPrice"]
@@ -29,6 +31,12 @@ class PortfolioContainer extends React.Component {
       this.setState({ stocks: stocks })
     })
   }
+
+  componentDidMount() {
+    this.props.storePageName("Portfolio")
+  }
+
+
   render() {
     if (this.props.user && this.state.stocks.length == 0) {
       this.updateStocks()
@@ -41,4 +49,8 @@ class PortfolioContainer extends React.Component {
   }
 }
 
-export default PortfolioContainer
+const mapDispatchToProps = {    
+  storePageName
+}
+
+export default connect(null, mapDispatchToProps)(PortfolioContainer)
