@@ -100,7 +100,7 @@ const Layout = (props) => {
                 position="absolute"
                 className={classNames(classes.appBar, open && classes.appBarShift)}
             >
-                <Toolbar disableGutters={open} >
+                <Toolbar disableGutters={!open} >
                     <IconButton
                         color="inherit"
                         onClick={handleDrawerOpen}
@@ -109,12 +109,26 @@ const Layout = (props) => {
                         <MenuIcon />
                     </IconButton>
 
-                    <Typography style={{ flexGrow: 1 }} color="inherit" noWrap>
+                    <Typography style={{ flexGrow: 1, textAlign: 'left' }} color="inherit" noWrap>
                         Stockfolio
                     </Typography>
                     {/* {!this.props.isAuth ? null : <Button onClick={this.handleLogOut}><Typography
                         style={{ color: 'white', textTransform: 'none', paddingRight: "10px" }}
                     >Log Out</Typography></Button>} */}
+                    <Button color="inherit">
+                        <Link className="navlink" to="/containers/Login">
+                            Login
+                  </Link>
+                    </Button>
+                    <Button color="inherit" onClick={()=>{}}>
+                        Logout
+                            </Button>
+
+                    <Button color="inherit">
+                        <Link className="navlink" to="/containers/Register">
+                            Register
+                  </Link>
+                    </Button>
                 </Toolbar>
             </AppBar>
             <Drawer
