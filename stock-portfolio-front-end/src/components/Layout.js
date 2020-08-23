@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import { Drawer, MenuList, MenuItem, withStyles, IconButton, AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+import { Drawer, MenuList, MenuItem, withStyles, IconButton, AppBar, Toolbar, Typography, Button, ListItemIcon, ListItemText } from '@material-ui/core'
 import { Link } from "react-router-dom"
 import classNames from 'classnames';
 import '../styles/Layout.scss'
@@ -7,6 +7,9 @@ import Navbar from './Navbar';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import MenuIcon from '@material-ui/icons/Menu'
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import FolderIcon from '@material-ui/icons/Folder';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 const drawerWidth = 240
 
 const styles = theme => ({
@@ -77,6 +80,9 @@ const styles = theme => ({
         padding: '0 8px',
         ...theme.mixins.toolbar
     },
+    menuItem: {
+        paddingLeft: '24px'
+    }
 
 
 })
@@ -145,17 +151,27 @@ const Layout = (props) => {
                 </div>
 
                 <MenuList>
-                    <MenuItem component={Link} to="/containers/Transactions">Transactions</MenuItem>
-                    <MenuItem component={Link} to="/containers/Portfolio">Portfolio</MenuItem>
-                    <MenuItem component={Link} to="/containers/Purchase">Purchase</MenuItem>
+                    <MenuItem component={Link} to="/containers/Transactions" className={classes.menuItem}>
+                        <ListItemIcon>
+                            <ReceiptIcon/>
+                        </ListItemIcon>
+                        <ListItemText className="icon-Text"  primary="Transactions"/>
+                    </MenuItem>
+                    <MenuItem component={Link} to="/containers/Portfolio" className={classes.menuItem}>
+                        <ListItemIcon>
+                            <FolderIcon/>
+                        </ListItemIcon>
+                        <ListItemText  primary="Portfolio"/>
+                    </MenuItem>
+                    <MenuItem component={Link} to="/containers/Purchase" className={classes.menuItem}>
+                        <ListItemIcon>
+                            <ShoppingCartIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="Purchase"/>
+                    </MenuItem>
                 </MenuList>
             </Drawer>
-            {/* <Navbar
-                classes={classes}
-                open={open}
-                handleDrawerOpen={handleDrawerOpen}
-            /> */}
-
+ 
         </div>
         <main className="Apps">
             {children}
