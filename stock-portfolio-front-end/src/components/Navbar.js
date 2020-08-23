@@ -8,6 +8,9 @@ import Grid from "@material-ui/core/Grid"
 import "../styles/navbar.css"
 import { removeUserDispatch } from "../redux/reduxStore"
 import { connect } from "react-redux"
+import { IconButton } from "@material-ui/core"
+import MenuIcon from '@material-ui/icons/Menu'
+import classNames from 'classnames'
 
 class Navbar extends React.Component {
   constructor() {
@@ -19,9 +22,23 @@ class Navbar extends React.Component {
   }
 
   render() {
+    const { classes, open, handleDrawerOpen } = this.props
+    console.log('open', open)
+
     return (
-      <AppBar position="sticky">
+      <AppBar position="absolute"
+      className={classNames(classes.AppBar, open && classes.appBarShift)}
+      >
         <Toolbar>
+          <IconButton
+            color="inherit"
+            onClick={handleDrawerOpen}
+            className={classNames(classes.menuButton, open && classes.hide)}
+            style={{display: 'none'}}
+          >
+            <MenuIcon/>
+          </IconButton>
+
           <Grid container justify="space-between" alighContent="flex-end">
             <Grid item xm={12}>
               <Typography variant="h6">
@@ -32,7 +49,7 @@ class Navbar extends React.Component {
               </Typography>
             </Grid>
 
-            <Grid item>
+            {/* <Grid item>
               <Button color="inherit">
                 <Link className="navlink" to="/containers/Transactions">
                   Transactions
@@ -54,7 +71,7 @@ class Navbar extends React.Component {
                   Purchase
                 </Link>
               </Button>
-            </Grid>
+            </Grid> */}
 
             <Grid item xm={1}>
               {!this.props.email ? (
@@ -64,7 +81,7 @@ class Navbar extends React.Component {
                   </Link>
                 </Button>
               ) : (
-                <Button color="inherit" onClick={this.logoutHandler}>
+                <Button color="inheri/t" onClick={this.logoutHandler}>
                   Logout
                 </Button>
               )}

@@ -1,0 +1,22 @@
+@import './base.scss';
+
+.Apps > header {
+    text-align: center;
+}
+
+.App-logo {
+    height: 80px;
+}
+
+.App-header {
+    background-color: #222;
+    padding: 20px;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    min-width: 216px;
+}
+
+.App-title {
+    font-size: 1.8rem;
+}
