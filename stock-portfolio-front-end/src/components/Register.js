@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link } from "react-router-dom"
+import { Paper } from '@material-ui/core';
 
 
 function Copyright() {
@@ -28,10 +29,19 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    // marginTop: theme.spacing(8),
+    // display: 'flex',
+    // flexDirection: 'column',
+    // alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    padding: theme.spacing.unit * 6, 
+    paddingBottom: theme.spacing.unit * 15,
+    textAlign: "left",
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    width: '100%'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -49,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp(props) {
   const classes = useStyles();
   return (
+    <Paper className={classes.paper}>
     <Container component="main" maxWidth="xs">
       <ul>
         {
@@ -144,5 +155,6 @@ export default function SignUp(props) {
         <Copyright />
       </Box>
     </Container>
+    </Paper>
   );
 }

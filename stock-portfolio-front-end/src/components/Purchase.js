@@ -12,6 +12,7 @@ import Box from "@material-ui/core/Box"
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import Container from "@material-ui/core/Container"
+import { Paper } from "@material-ui/core"
 
 function Copyright() {
   return (
@@ -28,10 +29,15 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: theme.spacing.unit * 6,
+    paddingBottom: theme.spacing.unit * 15,
+    textAlign: "left",
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    width: '100%'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -51,70 +57,74 @@ const Purchase = (props) => {
 
   if (props.email) {
     return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
+      <Paper className={classes.paper}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
 
-        <form name="purchase" onSubmit={props.onSubmitHandler}>
-          <Typography component="h1" variant="h5">
-            Purchase stocks{" "}
-          </Typography>
-          <ul>
-            {props.errors
-              ? props.errors.map((err, index) => <li key={index}>{err.msg}</li>)
-              : null}
-          </ul>
-          <div>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="ticker"
-              label="ticker"
-              name="ticker"
-              autoComplete="ticker"
-              autoFocus
-              onChange={props.onTickerChange}
-            />
-          </div>
-          <div>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="qty"
-              label="qty"
-              type="qty"
-              id="qty"
-              autoComplete="qty"
-              onChange={props.onQtyChange}
-            />
-          </div>
+          <form name="purchase" onSubmit={props.onSubmitHandler}>
+            <Typography component="h1" variant="h5">
+              Purchase stocks{" "}
+            </Typography>
+            <ul>
+              {props.errors
+                ? props.errors.map((err, index) => <li key={index}>{err.msg}</li>)
+                : null}
+            </ul>
+            <div>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="ticker"
+                label="ticker"
+                name="ticker"
+                autoComplete="ticker"
+                autoFocus
+                onChange={props.onTickerChange}
+              />
+            </div>
+            <div>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="qty"
+                label="qty"
+                type="qty"
+                id="qty"
+                autoComplete="qty"
+                onChange={props.onQtyChange}
+              />
+            </div>
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Purchase
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Purchase
           </Button>
-        </form>
-      </Container>
+          </form>
+        </Container>
+      </Paper>
     )
   }
-  else{
+  else {
     return (
-      <div>
-        <Typography component="h1" variant="h5">
-          Purchase Stocks
+      <Paper className={classes.paper}>
+        <div>
+          <Typography component="h1" variant="h5">
+            Purchase Stocks
         </Typography>
-        <p>
-          Please <Link to="../containers/Login">log in</Link> to purchase stocks.
+          <p>
+            Please <Link to="../containers/Login">log in</Link> to purchase stocks.
         </p>
-      </div>
+        </div>
+      </Paper>
     )
   }
 }

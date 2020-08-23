@@ -12,17 +12,29 @@ import Typography from "@material-ui/core/Typography"
 import Paper from "@material-ui/core/Paper"
 import "../App.css"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
-})
+  paper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: theme.spacing.unit * 6, 
+    paddingBottom: theme.spacing.unit * 15,
+    textAlign: "left",
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    width: '100%'
+  },
+}))
 
 const Transactions = (props) => {
   const classes = useStyles()
 
   if (props.email) {
     return (
+      <Paper className={classes.paper}>
       <div class="table">
         <Typography component="h1" variant="h5">
           Transactions History
@@ -60,9 +72,11 @@ const Transactions = (props) => {
           </Table>
         </TableContainer>
       </div>
+      </Paper>
     )
   } else {
     return (
+      <Paper className={classes.paper}>
       <div>
         <Typography component="h1" variant="h5">
           Transactions History
@@ -71,6 +85,7 @@ const Transactions = (props) => {
           Please <Link to="../containers/Login">log in</Link> to view your transaction history.
         </p>
       </div>
+      </Paper>
     )
   }
 }
