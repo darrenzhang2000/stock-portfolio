@@ -116,14 +116,9 @@ const Purchase = (props) => {
   else {
     return (
       <Paper className={classes.paper}>
-        <div>
-          <Typography component="h1" variant="h5">
-            Purchase Stocks
-        </Typography>
-          <p>
+        <Typography component="h1" variant="h5">
             Please <Link to="../containers/Login">log in</Link> to purchase stocks.
-        </p>
-        </div>
+        </Typography>
       </Paper>
     )
   }

@@ -11,6 +11,7 @@ import { connect } from "react-redux"
 import { IconButton } from "@material-ui/core"
 import MenuIcon from '@material-ui/icons/Menu'
 import classNames from 'classnames'
+import {removeUser} from '../redux/userReducer'
 
 class Navbar extends React.Component {
   constructor() {
@@ -18,7 +19,9 @@ class Navbar extends React.Component {
   }
 
   logoutHandler = () => {
-    removeUserDispatch()
+    // removeUserDispatch()
+    console.log('logout handler')
+    this.props.removeUser()
   }
 
   render() {
@@ -81,7 +84,7 @@ class Navbar extends React.Component {
                   </Link>
                 </Button>
               ) : (
-                <Button color="inheri/t" onClick={this.logoutHandler}>
+                <Button color="inherit" onClick={() => {this.logoutHandler(); console.log('hi')}}>
                   Logout
                 </Button>
               )}
@@ -109,4 +112,8 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Navbar)
+const mapDispatchToProps = {
+  removeUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

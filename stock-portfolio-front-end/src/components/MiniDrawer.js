@@ -20,6 +20,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import '../styles/Layout.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import { removeUser } from '../redux/userReducer';
 
 const drawerWidth = 240;
 
@@ -101,6 +102,10 @@ export default function MiniDrawer(props) {
         setOpen(false);
     };
 
+    const handleLogout = () => {
+        dispatch(removeUser())
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -130,7 +135,7 @@ export default function MiniDrawer(props) {
                             Login
                   </Link>
                     </Button>
-                    <Button color="inherit" onClick={() => { }}>
+                    <Button color="inherit" onClick={handleLogout}>
                         Logout
                             </Button>
 

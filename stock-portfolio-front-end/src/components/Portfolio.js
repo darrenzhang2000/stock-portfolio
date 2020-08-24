@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: theme.spacing.unit * 6, 
+    padding: theme.spacing.unit * 6,
     paddingBottom: theme.spacing.unit * 15,
     textAlign: "left",
     borderBottomRightRadius: 10,
@@ -37,76 +37,73 @@ const Portfolio = (props) => {
   if (props.email) {
     return (
       <Paper className={classes.paper}>
-      <div class="table">
-        <Typography component="h1" variant="h5">
-          Portfolio
+        <div class="table">
+          <Typography component="h1" variant="h5">
+            Portfolio
         </Typography>
-        <TableContainer component={Paper} className="tableContainer">
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Stock Ticker Symbol</TableCell>
-                <TableCell align="right">Quantity</TableCell>
-                <TableCell align="right">Total Value</TableCell>
-                <TableCell align="right">Opening Price</TableCell>
-                <TableCell align="right">Current Price</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {props.stocks.length > 0 ? (
-                props.stocks.map((stock, index) => {
-                  let color
-                  if (stock.currentPrice < stock.openingPrice) {
-                    color = "red"
-                  } else if (stock.currentPrice == stock.openingPrice) {
-                    color = "gray"
-                  } else {
-                    color = "green"
-                  }
+          <TableContainer component={Paper} className="tableContainer">
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Stock Ticker Symbol</TableCell>
+                  <TableCell align="right">Quantity</TableCell>
+                  <TableCell align="right">Total Value</TableCell>
+                  <TableCell align="right">Opening Price</TableCell>
+                  <TableCell align="right">Current Price</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {props.stocks.length > 0 ? (
+                  props.stocks.map((stock, index) => {
+                    let color
+                    if (stock.currentPrice < stock.openingPrice) {
+                      color = "red"
+                    } else if (stock.currentPrice == stock.openingPrice) {
+                      color = "gray"
+                    } else {
+                      color = "green"
+                    }
 
-                  return (
-                    <TableRow key={index}>
-                      <TableCell
-                        component="th"
-                        scope="row"
-                        style={{ color: color }}
-                      >
-                        {stock.tickerSymb}
-                      </TableCell>
-                      <TableCell align="right">{stock.qty}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(stock.currentPrice * 100 * stock.qty) / 100}
-                      </TableCell>
-                      <TableCell align="right">
-                        {Math.round(stock.openingPrice * 100) / 100}
-                      </TableCell>
-                      <TableCell align="right" style={{ color: color }}>
-                        {Math.round(stock.currentPrice * 100) / 100}
-                      </TableCell>
-                    </TableRow>
-                  )
-                })
-              ) : (
-                <TableCell component="th" scope="row">
-                  User does not have any stocks
-                </TableCell>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
+                    return (
+                      <TableRow key={index}>
+                        <TableCell
+                          component="th"
+                          scope="row"
+                          style={{ color: color }}
+                        >
+                          {stock.tickerSymb}
+                        </TableCell>
+                        <TableCell align="right">{stock.qty}</TableCell>
+                        <TableCell align="right">
+                          {Math.round(stock.currentPrice * 100 * stock.qty) / 100}
+                        </TableCell>
+                        <TableCell align="right">
+                          {Math.round(stock.openingPrice * 100) / 100}
+                        </TableCell>
+                        <TableCell align="right" style={{ color: color }}>
+                          {Math.round(stock.currentPrice * 100) / 100}
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })
+                ) : (
+                    <TableCell component="th" scope="row">
+                      User does not have any stocks
+                    </TableCell>
+                  )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
       </Paper>
     )
   } else {
     return (
       <Paper className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Portfolio
-        </Typography>
-        <p>
           Please <Link to="../containers/Login">log in</Link> to view your
           portfolio.
-        </p>
+      </Typography>
       </Paper>
     )
   }

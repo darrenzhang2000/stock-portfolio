@@ -14,6 +14,7 @@ export function addUser(user) {
 }
 
 export function removeUser() {
+  console.log('rm user')
   return {
     type: REMOVE_USER,
   }

@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: theme.spacing.unit * 6, 
+    padding: theme.spacing.unit * 6,
     paddingBottom: theme.spacing.unit * 15,
     textAlign: "left",
     borderBottomRightRadius: 10,
@@ -109,6 +109,9 @@ export default function SignIn(props) {
             >
               Sign In
           </Button>
+            <Link to="./Register" variant="body2">
+              {"Don't have an account? Sign Up"}
+            </Link>
             {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

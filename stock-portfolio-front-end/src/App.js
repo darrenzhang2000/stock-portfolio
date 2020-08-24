@@ -19,6 +19,7 @@ import { MuiThemeProvider, CssBaseline } from "@material-ui/core"
 import theme from './utilities/CustomTheme'
 import MiniDrawer from "./components/MiniDrawer"
 import CustomizedSnackbar from "./utilities/CustomizedSnackbar"
+import AppRoute from "./routers/AppRouter"
 class App extends React.Component {
   constructor() {
     super()
@@ -43,11 +44,8 @@ class App extends React.Component {
 
 
           <Router>
-            <MiniDrawer>
-            {/* <Layout> */}
-              {/* <Navbar className="navbar" /> */}
-
-
+            <AppRoute user={this.state.user} setUser={this.setUser} getUser={this.getUser}/>
+            {/* <MiniDrawer>
               <Switch>
                 <Route path="/components/Home">
                   <Home className="top" />
@@ -73,8 +71,7 @@ class App extends React.Component {
                   <PurchaseContainer getUser={this.getUser} />
                 </Route>
               </Switch>
-            {/* </Layout> */}
-            </MiniDrawer>
+            </MiniDrawer> */}
           </Router>
         </MuiThemeProvider>
       </div>

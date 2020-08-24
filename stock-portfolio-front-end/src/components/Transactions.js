@@ -77,14 +77,9 @@ const Transactions = (props) => {
   } else {
     return (
       <Paper className={classes.paper}>
-      <div>
         <Typography component="h1" variant="h5">
-          Transactions History
-        </Typography>
-        <p>
           Please <Link to="../containers/Login">log in</Link> to view your transaction history.
-        </p>
-      </div>
+        </Typography>
       </Paper>
     )
   }
