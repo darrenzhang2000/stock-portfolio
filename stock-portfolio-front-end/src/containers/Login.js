@@ -67,7 +67,7 @@ class LoginContainer extends React.Component {
                         addUserDispatch({ email: this.state.email, balance: 5000 })
 
                         //pass user to login
-                        this.props.setUser(this.state.email)
+                        this.props.setUser(this.state.email)                        
                     }
                 })
         }

@@ -2,7 +2,9 @@ import React from "react"
 import Register from "../components/Register"
 import axios from 'axios'
 import { connect } from "react-redux";
-import { storePageName } from '../redux/actionCreators'
+import { storePageName, setSnackbarState } from '../redux/actionCreators'
+import {addUser} from '../redux/userReducer'
+import { Redirect } from "react-router-dom";
 
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -66,21 +68,38 @@ class RegisterContainer extends React.Component {
         if (!errors.length) {
             axios.post('http://localhost:5000/users/register', { user })
                 .then(res => {
+                    let open = true
+                    let message = "You have successfully registered the user!"
+                    let variant = "success"
+
                     //check if email already exists in db
                     if (res.data == "Email already exists") {
                         errors.push({ msg: "Email already exists" })
                         //re-direct to same page with error and original data 
                         this.setState({ errors: errors })
+
+                        message = errors.reduce((s, obj) => s += obj.msg + '. ', "")
+                        variant = "error"
+                        this.props.setSnackbarState(open, message, variant)
                     }
                     else {
-                        //success
-                        alert('You have successfully registered')
-                        //redirect to home page
+                        //success message
+                        this.props.setSnackbarState(open, message, variant)
+
+                        //add user email to redux
+                        this.props.addUser(this.state.email, this.state.balance)
                     }
                 })
+
+
         }
         else {
             //if there are errors, re-direct to the same page with errors and original data
+            let open = true
+            let message = errors.reduce((s, obj) => s += obj.msg + '. ', "")
+            console.log(message)
+            let variant = "success"
+            this.props.setSnackbarState(open, message, variant)
             this.setState({ errors: errors })
         }
     }
@@ -90,26 +109,25 @@ class RegisterContainer extends React.Component {
     }
 
     render() {
-        if (this.props.isLoggedIn) {
-            console.log('logged in not null')
-            return (
-                <Register
-                    name={this.state.name}
-                    email={this.state.email}
-                    password={this.state.password}
-                    balance={this.state.balance}
-                    errors={this.state.errors}
-                    changeNameHandler={this.changeNameHandler}
-                    changeEmailHandler={this.changeEmailHandler}
-                    changePasswordHandler={this.changePasswordHandler}
-                    onSubmitHandler={this.onSubmitHandler}
-                />
-            )
-        }else{
-            console.log('not logged in null')
-            return null
+        if(this.props.isLoggedIn){
+            return <Redirect to="/components/home"/>
         }
+
+        return (
+            <Register
+                name={this.state.name}
+                email={this.state.email}
+                password={this.state.password}
+                balance={this.state.balance}
+                errors={this.state.errors}
+                changeNameHandler={this.changeNameHandler}
+                changeEmailHandler={this.changeEmailHandler}
+                changePasswordHandler={this.changePasswordHandler}
+                onSubmitHandler={this.onSubmitHandler}
+            />
+        )
     }
+
 }
 
 const mapStateToProps = state => ({
@@ -117,7 +135,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-    storePageName
+    storePageName, setSnackbarState, addUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer)
