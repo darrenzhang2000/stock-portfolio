@@ -21,15 +21,12 @@ const Home = (props) => {
   const classes = useStyles()
   return (
     <Paper className={classes.paper}>
-      <div class="center">
-        <h1>Welcome to Stockfolio!</h1>
+        <Typography variant="h4">Welcome to Stockfolio!</Typography>
         <Typography>
           Here, you can create an account, buy stocks, and audit your
           transactions.
-      </Typography>
-        <p>To begin, <Link to="./Login">login</Link> or <Link to="./Register">sign up</Link> </p>
-        <p></p>
-      </div>
+        </Typography>
+        <Typography>To begin, <Link to="./Login">login</Link> or <Link to="./Register">sign up</Link> </Typography>
     </Paper>
   )
 }

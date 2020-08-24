@@ -131,7 +131,7 @@ export default function MiniDrawer(props) {
 
                     <Typography variant="h6" noWrap style={{ flexGrow: 1 }}>
                         <Button>
-                            <Link to="/components/Home">Stockfolio</Link>
+                            <Link className="navlink" to="/components/Home">Stockfolio</Link>
                         </Button>
                     </Typography>
 
@@ -147,9 +147,7 @@ export default function MiniDrawer(props) {
 
                     {!isLoggedIn ?
                         <Button color="inherit">
-                            <Link className="navlink" to="/containers/Register">
-                                Register
-                        </Link>
+                            <Link className="navlink" to="/containers/Register">Register  </Link>
                         </Button>
                         : null}
                 </Toolbar>

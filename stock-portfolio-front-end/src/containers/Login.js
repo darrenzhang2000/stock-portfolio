@@ -4,6 +4,7 @@ import axios from 'axios'
 import { addUserDispatch } from '../redux/reduxStore'
 import { connect } from 'react-redux'
 import { storePageName } from '../redux/actionCreators'
+import {Redirect} from 'react-router-dom'
 
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -65,10 +66,8 @@ class LoginContainer extends React.Component {
                         //add user to redux store
                         addUserDispatch({ email: this.state.email, balance: 5000 })
 
-                        alert("Login Successful!")
                         //pass user to login
                         this.props.setUser(this.state.email)
-                        //redirect to home page
                     }
                 })
         }
@@ -84,6 +83,10 @@ class LoginContainer extends React.Component {
     render() {
         this.props.location ? console.log(this.props.location.state.msg) : console.log('nothing')
 
+        if(this.props.isLoggedIn){
+            return <Redirect to="/components/home"/>
+        }
+
         return <Login
             errors={this.state.errors}
             changeEmailHandler={this.changeEmailHandler}
@@ -92,6 +95,10 @@ class LoginContainer extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => ({
+    isLoggedIn: state.userReducer.email != ""
+})
+
 const mapDispatchToProps = { addUserDispatch, storePageName }
 
-export default connect(null, mapDispatchToProps)(LoginContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)
