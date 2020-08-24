@@ -88,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MiniDrawer(props) {
     const dispatch = useDispatch()
+    const isLoggedIn = useSelector(state => state.userReducer.email != "")
     const pageName = useSelector(state => state.layoutReducer.pageName)
     const { children } = props
     const classes = useStyles();
@@ -127,23 +128,30 @@ export default function MiniDrawer(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap style={{ flexGrow: 1 }}>
-                        Stockfolio
-          </Typography>
-                    <Button color="inherit">
-                        <Link className="navlink" to="/containers/Login">
-                            Login
-                  </Link>
-                    </Button>
-                    <Button color="inherit" onClick={handleLogout}>
-                        Logout
-                            </Button>
 
-                    <Button color="inherit">
-                        <Link className="navlink" to="/containers/Register">
-                            Register
-                  </Link>
-                    </Button>
+                    <Typography variant="h6" noWrap style={{ flexGrow: 1 }}>
+                        <Button>
+                            <Link to="/components/Home">Stockfolio</Link>
+                        </Button>
+                    </Typography>
+
+                    {!isLoggedIn ?
+                        <Button color="inherit">
+                            <Link className="navlink" to="/containers/Login">Login</Link>
+                        </Button>
+                        : null}
+
+                    {isLoggedIn ?
+                        <Button color="inherit" onClick={handleLogout}>Logout</Button>
+                        : null}
+
+                    {!isLoggedIn ?
+                        <Button color="inherit">
+                            <Link className="navlink" to="/containers/Register">
+                                Register
+                        </Link>
+                        </Button>
+                        : null}
                 </Toolbar>
             </AppBar>
             <Drawer

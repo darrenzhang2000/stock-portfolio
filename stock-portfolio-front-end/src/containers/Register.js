@@ -90,24 +90,34 @@ class RegisterContainer extends React.Component {
     }
 
     render() {
-        return (
-            <Register
-                name={this.state.name}
-                email={this.state.email}
-                password={this.state.password}
-                balance={this.state.balance}
-                errors={this.state.errors}
-                changeNameHandler={this.changeNameHandler}
-                changeEmailHandler={this.changeEmailHandler}
-                changePasswordHandler={this.changePasswordHandler}
-                onSubmitHandler={this.onSubmitHandler}
-            />
-        )
+        if (this.props.isLoggedIn) {
+            console.log('logged in not null')
+            return (
+                <Register
+                    name={this.state.name}
+                    email={this.state.email}
+                    password={this.state.password}
+                    balance={this.state.balance}
+                    errors={this.state.errors}
+                    changeNameHandler={this.changeNameHandler}
+                    changeEmailHandler={this.changeEmailHandler}
+                    changePasswordHandler={this.changePasswordHandler}
+                    onSubmitHandler={this.onSubmitHandler}
+                />
+            )
+        }else{
+            console.log('not logged in null')
+            return null
+        }
     }
 }
 
-const mapStateToProps = {
+const mapStateToProps = state => ({
+    isLoggedIn: state.userReducer.email != ""
+})
+
+const mapDispatchToProps = {
     storePageName
 }
 
-export default connect(null, mapStateToProps)(RegisterContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer)
