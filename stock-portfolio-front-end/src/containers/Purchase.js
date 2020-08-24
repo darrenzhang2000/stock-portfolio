@@ -140,7 +140,6 @@ class PurchaseContainer extends React.Component {
 
   componentDidMount(){
     this.props.storePageName("Purchase")
-    this.props.setSnackbarState(true, "hi", 'error')
   }
 
   render() {
