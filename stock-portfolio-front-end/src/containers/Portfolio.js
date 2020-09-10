@@ -39,6 +39,7 @@ class PortfolioContainer extends React.Component {
 
   render() {
     if (this.props.user && this.state.stocks.length == 0) {
+
       this.updateStocks()
     }
     return (

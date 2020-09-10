@@ -178,7 +178,7 @@ const Layout = (props) => {
                             {/* <div style={{ width: 'auto', textAlign: 'center', padding: '20px' }}>
                                 <img src={""} alt="logo" style={{ maxWidth: '100%', height: '30px' }} />
                             </div> */}
-                            <h1 className="App-title">{} zzz</h1>
+                            <h1 className="App-title">{pageName} zzz</h1>
                         </div>
                     </header>
                     {children}

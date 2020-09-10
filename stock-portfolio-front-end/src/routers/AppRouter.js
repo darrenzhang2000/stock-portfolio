@@ -37,9 +37,13 @@ const AppRoute = (props) => {
                     <PortfolioContainer className="top" user={user} />
                 </PrivateRoute>
 
-                <PrivateRoute path="/containers/Purchase" component={PurchaseContainer}/>
-                    {/* <PurchaseContainer getUser={getUser} />
+                <PrivateRoute path="/containers/Purchase" component={PurchaseContainer} />
+                {/* <PurchaseContainer getUser={getUser} />
                 </PrivateRoute> */}
+
+                <Route path="/">
+                    <Home className="top" />
+                </Route>
             </Switch>
             {/* </Layout> */}
         </MiniDrawer>

@@ -45,33 +45,6 @@ class App extends React.Component {
 
           <Router>
             <AppRoute user={this.state.user} setUser={this.setUser} getUser={this.getUser}/>
-            {/* <MiniDrawer>
-              <Switch>
-                <Route path="/components/Home">
-                  <Home className="top" />
-                </Route>
-
-                <Route path="/containers/Login">
-                  <LoginContainer className="top" setUser={this.setUser} />
-                </Route>
-
-                <Route path="/containers/Register">
-                  <RegisterContainer className="top" />
-                </Route>
-
-                <Route path="/containers/Transactions">
-                  <TransactionsContainer className="top" email={this.props.email} />
-                </Route>
-
-                <Route path="/containers/Portfolio">
-                  <PortfolioContainer className="top" user={this.state.user} />
-                </Route>
-
-                <Route path="/containers/Purchase">
-                  <PurchaseContainer getUser={this.getUser} />
-                </Route>
-              </Switch>
-            </MiniDrawer> */}
           </Router>
         </MuiThemeProvider>
       </div>
